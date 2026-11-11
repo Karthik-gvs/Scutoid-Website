@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products — Scutoid AI Labs</title>
+<meta name="description" content="Scutoid AI Labs builds Compliance AI: AI-native solutions across the Scutoid Works suite — PLM, MES, Procurement, Inventory and Bookkeeping.">
+<link rel="icon" href="assets/Scutoid_Favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Icon sprite (Lucide-style outline, 24px grid, 2px stroke) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M21 3l-7 7M3 21l7-7M9 21H3v-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M7 7h10v10M7 17 17 7"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7v10H7"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Scutoid AI Labs home">
+      <img class="logo-light" src="assets/Scutoid_Logo_Light_2.png" alt="Scutoid" height="28">
+      <img class="logo-dark" src="assets/Scutoid_Logo_Dark_2.png" alt="" height="28">
+      <span class="logo-tag">AI Labs</span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Primary">
+      <div class="has-mega">
+        <button class="menu-btn" aria-expanded="false">Native AI <svg class="i"><use href="#i-chev"/></svg></button>
+        <div class="mega">
+          <div class="wrap mega-in">
+            <a class="mega-title" href="index.html#top"><b>Native AI</b><span>Compliance AI, agents and custom workflows built into every Scutoid product.</span></a>
+            <a href="index.html#capabilities"><b>Compliance AI</b><span>Read, check, explain and prepare.</span></a>
+            <a href="index.html#agents"><b>Agents</b><span>One job each, with a full trail.</span></a>
+            <a href="index.html#workflows"><b>Custom workflows</b><span>Describe it. AI builds it.</span></a>
+            <a href="index.html#how"><b>How it works</b><span>From a transaction to a signed approval.</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="has-mega">
+        <button class="menu-btn" aria-expanded="false">Products <svg class="i"><use href="#i-chev"/></svg></button>
+        <div class="mega">
+          <div class="wrap mega-in mega-products">
+            <div class="mega-group">
+              <h6><a href="products.html?suite=works">Scutoid Works</a></h6>
+              <a href="products.html?suite=works&p=plm"><b>PLM</b><span>Design and engineering change.</span></a>
+              <a href="products.html?suite=works&p=mes"><b>MES</b><span>Work orders and the shop floor.</span></a>
+              <a href="products.html?suite=works&p=pro"><b>Procurement</b><span>Sourcing and supplier orders.</span></a>
+              <a href="products.html?suite=works&p=inv"><b>Inventory</b><span>Batches, stock and despatch.</span></a>
+              <a href="products.html?suite=works&p=bk"><b>Bookkeeping</b><span>Books, GST and TDS.</span></a>
+            </div>
+            <div class="mega-group space">
+              <h6><a href="products.html?suite=space">Scutoid Space</a></h6>
+              <a href="products.html?suite=space&p=mcc"><b>Mission Command Center</b><span>Plan, command and monitor missions.</span></a>
+              <a href="products.html?suite=space&p=eo"><b>Earth Observation</b><span>Turn imagery and data into decisions.</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="index.html#integrations">Integrations</a>
+      <a href="about.html#services">Services</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-t4" href="index.html#early-access">Book a Demo</a>
+      <a class="btn btn-t1" href="login.html">Trial Now</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<!-- SUITE HERO -->
+<section class="phero" id="products-top">
+  <div class="phero-bg" aria-hidden="true">
+    <svg class="orbit" viewBox="0 0 600 600" fill="none" stroke="currentColor"><circle cx="300" cy="300" r="120" stroke-opacity=".5"/><circle cx="300" cy="300" r="190" stroke-opacity=".32" stroke-dasharray="3 9"/><circle cx="300" cy="300" r="265" stroke-opacity=".22"/><circle cx="300" cy="300" r="40" fill="currentColor" fill-opacity=".14"/><circle cx="420" cy="300" r="9" fill="currentColor" stroke="none"/><circle cx="170" cy="110" r="6" fill="currentColor" stroke="none" fill-opacity=".7"/><circle cx="520" cy="420" r="5" fill="currentColor" stroke="none" fill-opacity=".6"/></svg>
+    <!-- Manufacturing motif (light mode): meshing gears over a conveyor. Orbit above is for dark mode. -->
+    <svg class="mfg" viewBox="0 0 520 420" fill="none" stroke="currentColor" stroke-width="2.5">
+      <g class="gear g1"><circle cx="190" cy="140" r="60" stroke-width="14" stroke-dasharray="9.4 9.45" stroke-opacity=".55"/><circle cx="190" cy="140" r="52" fill="currentColor" fill-opacity=".1"/><circle cx="190" cy="140" r="16" stroke-opacity=".7"/><path d="M190 96v88M146 140h88" stroke-opacity=".3"/></g>
+      <g class="gear g2"><circle cx="298" cy="212" r="40" stroke-width="12" stroke-dasharray="8.97 8.97" stroke-opacity=".55"/><circle cx="298" cy="212" r="34" fill="currentColor" fill-opacity=".1"/><circle cx="298" cy="212" r="11" stroke-opacity=".7"/><path d="M298 182v60M268 212h60" stroke-opacity=".3"/></g>
+      <g class="gear g3"><circle cx="400" cy="92" r="26" stroke-width="9" stroke-dasharray="7.2 7.2" stroke-opacity=".4"/><circle cx="400" cy="92" r="21" fill="currentColor" fill-opacity=".08"/><circle cx="400" cy="92" r="7" stroke-opacity=".6"/></g>
+      <rect x="40" y="338" width="440" height="22" rx="11" stroke-opacity=".5"/>
+      <g class="rollers"><circle cx="60" cy="349" r="6" stroke-opacity=".7"/><circle cx="170" cy="349" r="6" stroke-opacity=".7"/><circle cx="280" cy="349" r="6" stroke-opacity=".7"/><circle cx="390" cy="349" r="6" stroke-opacity=".7"/><circle cx="460" cy="349" r="6" stroke-opacity=".7"/></g>
+      <g class="crate c1"><rect x="40" y="298" width="40" height="34" rx="5" fill="currentColor" fill-opacity=".16"/><path d="M40 312h40" stroke-opacity=".5"/></g>
+      <g class="crate c2"><rect x="40" y="306" width="30" height="26" rx="5" fill="currentColor" fill-opacity=".1"/><path d="M40 318h30" stroke-opacity=".5"/></g>
+      <g class="crate c3"><rect x="40" y="298" width="40" height="34" rx="5" fill="currentColor" fill-opacity=".16"/><path d="M40 312h40" stroke-opacity=".5"/></g>
+    </svg>
+  </div>
+  <div class="wrap phero-in">
+    <span class="badge purple"><svg class="i"><use href="#i-sparkles"/></svg>Products</span>
+    <h1 id="phTitle">Scutoid Works</h1>
+    <p class="phero-tag" id="phTag"></p>
+    <p class="lead" id="phLead"></p>
+    <div class="suite-switch glass" role="tablist" aria-label="Suite">
+      <button role="tab" aria-selected="true" data-suite-btn="works">Scutoid Works</button>
+      <button role="tab" aria-selected="false" data-suite-btn="space">Scutoid Space</button>
+    </div>
+    <div class="actions">
+      <a class="btn btn-t1 lg" href="login.html">Trial Now</a>
+      <a class="btn btn-t2 lg" href="index.html#early-access">Book a Demo</a>
+    </div>
+    <p class="phero-try"><a class="inline" href="#see-app">Try the application preview</a></p>
+    <div class="pchips" id="pChips"></div>
+  </div>
+</section>
+
+<div id="pwrap">
+<!-- Floating navigation: starts at "How the products connect" and stays through the application and products -->
+<div class="subnav flush" id="subnav">
+  <div class="subnav-stack">
+    <div class="wrap subnav-in" id="snMain">
+      <span class="subnav-suite" id="snSuite">Scutoid Works</span>
+      <nav class="sn-products" id="snTop" aria-label="Sections of this page">
+        <button type="button" data-go="pflow">How they connect</button>
+        <button type="button" data-go="see-app">Application</button>
+        <button type="button" data-go="products">Products</button>
+      </nav>
+    </div>
+    <div class="wrap subnav-in sub2" id="snSub" hidden>
+      <nav class="sn-products" id="snProducts" aria-label="Products in this suite"></nav>
+    </div>
+  </div>
+</div>
+
+<!-- HOW THE PRODUCTS CONNECT -->
+<section class="section" id="pflow">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">How the products connect</p>
+      <h2 id="flowTitle"></h2>
+      <p class="sub" id="flowSub"></p>
+    </div>
+    <ol class="flow" id="pFlow"></ol>
+  </div>
+</section>
+
+<!-- THE APPLICATION -->
+<section class="section alt" id="see-app">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">The application</p>
+      <h2>See it the way your team will.</h2>
+      <p class="sub">Click through a working preview in four steps, with Compliance AI findings built into each screen. It follows the suite you chose at the top.</p>
+    </div>
+    <!-- APPLICATION DEMO (follows the chosen suite) -->
+  <div class="demo" id="experience">
+    <div class="try">
+      <ol class="demo-steps" id="demoSteps" aria-label="Try it in four steps">
+        <li data-s="1"><b>1</b>Choose a product</li>
+        <li data-s="2"><b>2</b>Select a row</li>
+        <li data-s="3"><b>3</b>Review findings</li>
+        <li data-s="4"><b>4</b>Sign and approve</li>
+      </ol>
+      <div class="try-act">
+        <button type="button" class="btn t3 sm" id="demoReset">Reset</button>
+        <button type="button" class="btn t4 sm" id="demoMax" aria-pressed="false">Full Screen</button>
+      </div>
+    </div>
+    <p class="try-hint" id="demoHint" role="status" aria-live="polite"></p>
+
+    <div class="frame">
+      <div class="app" id="app">
+        <aside class="rail" id="rail" aria-label="Applications"></aside>
+
+        <div class="main">
+          <header class="tb">
+            <div class="crumb"><span id="crumb">Design</span><i>›</i><b id="ptitle">Parts</b></div>
+            <div class="pill-cluster">
+              <button class="ib" aria-label="Search" title="Search"><svg class="i"><use href="#i-search"/></svg></button>
+              <button class="ib ai" aria-label="Compliance AI" title="Compliance AI"><svg class="i"><use href="#i-sparkles"/></svg></button>
+              <button class="ib" id="modeBtn" aria-label="Toggle light and dark" title="Light / dark"><svg class="i"><use href="#i-moon"/></svg></button>
+              <button class="ib" aria-label="Notifications" title="Notifications"><svg class="i"><use href="#i-bell"/></svg></button>
+            </div>
+          </header>
+
+          <div class="content">
+            <div class="kpis" id="kpis"></div>
+
+            <div class="fbar card">
+              <button class="sel" type="button"><span id="viewName">All Parts</span><svg class="i"><use href="#i-chev"/></svg></button>
+              <button class="btn t3" type="button"><svg class="i"><use href="#i-plus"/></svg>Add Filter</button>
+              <span class="grow"></span>
+              <button class="btn t3 hide-sm" type="button"><svg class="i"><use href="#i-download"/></svg>Export</button>
+              <button class="btn t1" type="button" id="newBtn"><svg class="i"><use href="#i-plus"/></svg><span id="newLabel">New Part</span></button>
+            </div>
+
+            <div class="split">
+              <div class="tcard card">
+                <div class="ttool">
+                  <label class="search"><svg class="i"><use href="#i-search"/></svg><input type="search" placeholder="Search" aria-label="Search table"></label>
+                  <span class="grow"></span>
+                  <button class="ib" aria-label="Export" title="Export"><svg class="i"><use href="#i-download"/></svg></button>
+                </div>
+                <div class="tscroll">
+                  <table>
+                    <thead id="thead"></thead>
+                    <tbody id="tbody"></tbody>
+                  </table>
+                </div>
+                <div class="tfoot"><span>Illustrative data</span><span>Page 1 of 5</span></div>
+              </div>
+
+              <aside class="qv card" id="qv" aria-label="Quick view"></aside>
+            </div>
+          </div>
+
+          <div class="overlay" id="ov"></div>
+          <aside class="drawer" id="drawer" aria-label="Review findings" aria-hidden="true"></aside>
+          <div class="toast" id="toast" role="status"></div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">Illustrative preview of the Scutoid application with Compliance AI. Sample data only; features shown are in design.</p>
+  </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Products</p>
+      <h2 id="pcTitle"></h2>
+      <p class="sub" id="pcSub"></p>
+    </div>
+    <div class="pcards" id="pCards"></div>
+  </div>
+
+  <div class="wrap" id="pdetail"></div>
+</section>
+
+</div>
+
+<!-- CLOSING CALL TO ACTION -->
+<section class="cta" id="try">
+  <div class="wrap cta-in">
+    <div>
+      <h2>Ready to try Scutoid?</h2>
+      <p>Start a trial, or book a demo and we will walk you through it.</p>
+    </div>
+    <div class="actions" style="justify-content:flex-start;margin:0">
+      <a class="btn t1 lg inv" href="login.html">Trial Now</a>
+      <a class="btn t4 lg ghost" href="index.html#early-access">Book a Demo</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer" id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="logo" href="index.html"><img src="assets/Scutoid_Logo_Dark_2.png" alt="Scutoid" height="28"><span class="logo-tag">AI Labs</span></a>
+      <p class="foot-note">AI-native solutions for the Scutoid Works product suite.</p>
+    </div>
+    <div><h5>Native AI</h5><a href="index.html#capabilities">Compliance AI</a><a href="index.html#agents">Agents</a><a href="index.html#workflows">Workflows</a></div>
+    <div><h5>Products</h5><a href="products.html?suite=works">Scutoid Works</a><a href="products.html?suite=space">Scutoid Space</a><a href="products.html?suite=space&p=mcc">Mission Command Center</a><a href="products.html?suite=space&p=eo">Earth Observation</a></div>
+    <div><h5>Company</h5><a href="about.html">About</a><a href="about.html#services">Services</a><a href="about.html#research">Research</a><a href="index.html#early-access">Book a demo</a><a href="mailto:hello@scutoid.ai">Contact</a></div>
+  </div>
+  <div class="wrap foot-base"><span>© 2026 Scutoid AI Labs. All rights reserved.</span><span>Privacy · Terms</span></div>
+</footer>
+<script src="site.js"></script>
+<script src="products.js"></script>
+</body>
+</html>

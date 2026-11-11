@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scutoid AI Labs — Compliance AI for Scutoid Works</title>
+<meta name="description" content="Scutoid AI Labs builds Compliance AI: AI-native solutions across the Scutoid Works suite — PLM, MES, Procurement, Inventory and Bookkeeping.">
+<link rel="icon" href="assets/Scutoid_Favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Icon sprite (Lucide-style outline, 24px grid, 2px stroke) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M21 3l-7 7M3 21l7-7M9 21H3v-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M7 7h10v10M7 17 17 7"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7v10H7"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Scutoid AI Labs home">
+      <img class="logo-light" src="assets/Scutoid_Logo_Light_2.png" alt="Scutoid" height="28">
+      <img class="logo-dark" src="assets/Scutoid_Logo_Dark_2.png" alt="" height="28">
+      <span class="logo-tag">AI Labs</span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Primary">
+      <div class="has-mega">
+        <button class="menu-btn" aria-expanded="false">Native AI <svg class="i"><use href="#i-chev"/></svg></button>
+        <div class="mega">
+          <div class="wrap mega-in">
+            <a class="mega-title" href="index.html#top"><b>Native AI</b><span>Compliance AI, agents and custom workflows built into every Scutoid product.</span></a>
+            <a href="index.html#capabilities"><b>Compliance AI</b><span>Read, check, explain and prepare.</span></a>
+            <a href="index.html#agents"><b>Agents</b><span>One job each, with a full trail.</span></a>
+            <a href="index.html#workflows"><b>Custom workflows</b><span>Describe it. AI builds it.</span></a>
+            <a href="index.html#how"><b>How it works</b><span>From a transaction to a signed approval.</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="has-mega">
+        <button class="menu-btn" aria-expanded="false">Products <svg class="i"><use href="#i-chev"/></svg></button>
+        <div class="mega">
+          <div class="wrap mega-in mega-products">
+            <div class="mega-group">
+              <h6><a href="products.html?suite=works">Scutoid Works</a></h6>
+              <a href="products.html?suite=works&p=plm"><b>PLM</b><span>Design and engineering change.</span></a>
+              <a href="products.html?suite=works&p=mes"><b>MES</b><span>Work orders and the shop floor.</span></a>
+              <a href="products.html?suite=works&p=pro"><b>Procurement</b><span>Sourcing and supplier orders.</span></a>
+              <a href="products.html?suite=works&p=inv"><b>Inventory</b><span>Batches, stock and despatch.</span></a>
+              <a href="products.html?suite=works&p=bk"><b>Bookkeeping</b><span>Books, GST and TDS.</span></a>
+            </div>
+            <div class="mega-group space">
+              <h6><a href="products.html?suite=space">Scutoid Space</a></h6>
+              <a href="products.html?suite=space&p=mcc"><b>Mission Command Center</b><span>Plan, command and monitor missions.</span></a>
+              <a href="products.html?suite=space&p=eo"><b>Earth Observation</b><span>Turn imagery and data into decisions.</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="index.html#integrations">Integrations</a>
+      <a href="about.html#services">Services</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-t4" href="index.html#early-access">Book a Demo</a>
+      <a class="btn btn-t1" href="login.html">Trial Now</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-copy">
+    <span class="badge purple"><svg class="i"><use href="#i-sparkles"/></svg>Scutoid AI Labs</span>
+    <h1>Compliance AI, making business easy, built into Scutoid Works.</h1>
+    <p class="lead">AI-native help across design, buy, make, stock and account. It reads and checks the work as it happens. Your team reviews and gives a signed approval.</p>
+    <div class="actions">
+      <a class="btn btn-t1 lg" href="login.html">Trial Now</a>
+      <a class="btn btn-t2 lg" href="#early-access">Book a Demo</a>
+    </div>
+  </div>
+
+
+  <div class="wrap hero-video" id="video">
+    <div class="vid-float vf1 glass" aria-hidden="true"><span class="cdot"><svg class="i"><use href="#i-check"/></svg></span><div><b>GRN-2291 complete</b><small>240 of 240 units</small></div></div>
+    <div class="vid-float vf2 glass" aria-hidden="true"><span class="cdot"><svg class="i"><use href="#i-check"/></svg></span><div><b>QC-1187 passed</b><small>0 rejected</small></div></div>
+    <p class="vid-label">See it work: from purchase order to bill, checked by AI</p>
+    <div class="vid" id="vid">
+      <div class="vid-stage" id="vidStage"></div>
+      <button class="vid-big" id="vidBig" type="button" aria-label="Play the demo"><span class="vid-playicon"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></span><b>Watch the demo</b><small>32 seconds, no sound</small></button>
+      <div class="vid-cap" id="vidCap" aria-live="polite"></div>
+      <div class="vid-bar">
+        <button class="ib" id="vidPlay" type="button" aria-label="Play"></button>
+        <input type="range" id="vidSeek" min="0" max="320" value="0" step="1" aria-label="Seek through the demo">
+        <span class="vid-time" id="vidTime">0:00 / 0:32</span>
+      </div>
+    </div>
+    <div class="vid-chaps" id="vidChaps" aria-label="Chapters"></div>
+    <p class="caption">Illustrative simulation with sample data. It is not a recording of a released feature; the capability is in design.</p>
+  </div>
+</section>
+
+<div class="native-ai" id="native-ai">
+<div class="subnav flush" id="aiNav">
+  <div class="wrap subnav-in">
+    <span class="subnav-suite">Native AI</span>
+    <nav class="sn-products" id="aiTabs" aria-label="Sections">
+      <button type="button" data-t="capabilities">Compliance AI</button>
+      <button type="button" data-t="agents">Agents</button>
+      <button type="button" data-t="workflows">Workflows</button>
+      <button type="button" data-t="how">How it works</button>
+    </nav>
+  </div>
+</div>
+
+<!-- CAPABILITIES -->
+<section class="section alt" id="capabilities">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Compliance AI</p>
+      <h2>AI-native, not bolted on.</h2>
+      <p class="sub">Four things Compliance AI does across the suite.</p>
+    </div>
+    <div class="grid4">
+      <article class="card pad"><div class="tile blue"><svg class="i"><use href="#i-file"/></svg></div><h3>Read</h3><p>Understands invoices, challans, certificates and drawings as they arrive, and turns them into structured records.</p></article>
+      <article class="card pad"><div class="tile green"><svg class="i"><use href="#i-shield"/></svg></div><h3>Check</h3><p>Tests every transaction against the rules that apply — tax, statutory, quality and supplier — before it becomes a problem.</p></article>
+      <article class="card pad"><div class="tile purple"><svg class="i"><use href="#i-help"/></svg></div><h3>Explain</h3><p>Shows the reason behind every flag in plain English, with a link to the source record.</p></article>
+      <article class="card pad"><div class="tile orange"><svg class="i"><use href="#i-pen"/></svg></div><h3>Prepare</h3><p>Drafts the correction, the return or the response. A person gives a signed approval before anything is final.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="section" id="agents">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Agent library</p>
+      <h2>Agents for every stage of the work.</h2>
+      <p class="sub">Each agent has one job and a full trail. These are planned agents; availability follows our release plan.</p>
+    </div>
+    <div class="grid3">
+      <article class="card pad agent"><div class="agent-top"><img src="assets/1.PLM.png" alt="" width="32" height="32"><span class="badge neutral dot">Planned</span></div><h3>Change Impact Agent</h3><p>Explains what an engineering change touches before release.</p><div class="steps-mini"><i>Read change</i><i>Trace BOM</i><i>Summarise</i></div></article>
+      <article class="card pad agent"><div class="agent-top"><img src="assets/1.MES_Manufactoring.png" alt="" width="32" height="32"><span class="badge neutral dot">Planned</span></div><h3>Quality Release Agent</h3><p>Checks inspection records and recommends release or a quality hold.</p><div class="steps-mini"><i>Read records</i><i>Check limits</i><i>Recommend</i></div></article>
+      <article class="card pad agent"><div class="agent-top"><img src="assets/1.Procurement.png" alt="" width="32" height="32"><span class="badge neutral dot">Planned</span></div><h3>Supplier Verification Agent</h3><p>Verifies supplier details and matches orders to invoices.</p><div class="steps-mini"><i>Verify</i><i>Match</i><i>Flag</i></div></article>
+      <article class="card pad agent"><div class="agent-top"><img src="assets/1.Inventory.png" alt="" width="32" height="32"><span class="badge neutral dot">Planned</span></div><h3>Job Work Agent</h3><p>Follows goods out to job workers and chases what is due back.</p><div class="steps-mini"><i>Track</i><i>Reconcile</i><i>Remind</i></div></article>
+      <article class="card pad agent"><div class="agent-top"><img src="assets/2.Books.png" alt="" width="32" height="32"><span class="badge neutral dot">Planned</span></div><h3>Tax Reconciliation Agent</h3><p>Reconciles GST and TDS against the books and drafts fixes.</p><div class="steps-mini"><i>Fetch</i><i>Reconcile</i><i>Draft</i></div></article>
+      <article class="card pad agent"><div class="agent-top"><img src="assets/2.Books.png" alt="" width="32" height="32"><span class="badge neutral dot">Planned</span></div><h3>Period Close Agent</h3><p>Builds the close checklist and explains what is blocking it.</p><div class="steps-mini"><i>Scan</i><i>Explain</i><i>Prepare</i></div></article>
+    </div>
+  </div>
+</section>
+
+
+<!-- WORKFLOW BUILDER -->
+<section class="section alt" id="workflows">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">Agentic workflows</p>
+      <h2>Tell it what to do. It builds the workflow.</h2>
+      <p class="sub">Describe an inventory operation in your own words. Compliance AI builds a custom agentic workflow for it, and you review every step before it runs.</p>
+    </div>
+    <div class="wf">
+      <div class="card pad wf-in">
+        <label class="fld" for="wfText">Your instruction</label>
+        <textarea id="wfText" rows="5" placeholder="For example: When stock of an item falls below its reorder level, draft a purchase order for the usual supplier and send it to me for approval."></textarea>
+        <p class="wf-hint">Try an example</p>
+        <div class="wf-chips" id="wfChips">
+          <button type="button" class="chip-btn" data-i="0">Reorder low stock</button>
+          <button type="button" class="chip-btn" data-i="1">Use short shelf life first</button>
+          <button type="button" class="chip-btn" data-i="2">Chase job work returns</button>
+        </div>
+        <button class="btn t1" type="button" id="wfBuild"><svg class="i"><use href="#i-sparkles"/></svg>Build Workflow</button>
+      </div>
+      <div class="card pad wf-out" id="wfOut" aria-live="polite">
+        <div class="wf-empty"><svg class="i"><use href="#i-sparkles"/></svg><p>Your workflow appears here. Choose an example or write your own instruction, then select Build Workflow.</p></div>
+      </div>
+    </div>
+    <p class="caption">Illustrative preview. Workflow building is in design; steps shown are examples, not shipped features.</p>
+  </div>
+</section>
+
+
+<!-- HOW -->
+<section class="section navy" id="how">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">How it works</p>
+      <h2>From a transaction to a decision you can defend.</h2>
+    </div>
+    <ol class="steps">
+      <li><b>1</b><h3>Work happens</h3><p>A purchase, a work order, a despatch or an entry is recorded in the suite.</p></li>
+      <li><b>2</b><h3>Compliance AI reviews</h3><p>It reads the record and tests it against the rules that apply and your own policies.</p></li>
+      <li><b>3</b><h3>You see why</h3><p>Issues come with the reason, the source and a suggested fix.</p></li>
+      <li><b>4</b><h3>A person approves</h3><p>A signed approval is recorded. The full trail stays with the record.</p></li>
+    </ol>
+  </div>
+</section>
+</div>
+
+<!-- INTEGRATIONS -->
+<section class="section alt" id="integrations">
+  <div class="wrap">
+    <div class="head head-title">
+      <h2>Integrations</h2>
+      <p class="tagline">Works with the tools you already use.</p>
+      <p class="sub">Compliance AI checks your data before it moves between Scutoid and your partner tools, and keeps a record of every sync. Connectors are planned; availability follows our release plan.</p>
+    </div>
+    <div class="grid4">
+      <article class="card pad int"><div class="int-top"><div class="tile blue"><svg class="i"><use href="#i-file"/></svg></div><span class="badge neutral dot">Planned</span></div><h3>Tally</h3><p>Move ledgers, bills and invoices between Scutoid and Tally, with checks before they sync.</p></article>
+      <article class="card pad int"><div class="int-top"><div class="tile green"><svg class="i"><use href="#i-file"/></svg></div><span class="badge neutral dot">Planned</span></div><h3>Zoho Books</h3><p>Keep Zoho Books in step with purchases, stock and despatch recorded in Scutoid.</p></article>
+      <article class="card pad int"><div class="int-top"><div class="tile orange"><svg class="i"><use href="#i-file"/></svg></div><span class="badge neutral dot">Planned</span></div><h3>QuickBooks</h3><p>Send approved bills and invoices to QuickBooks without re-entering them.</p></article>
+      <article class="card pad int"><div class="int-top"><div class="tile purple"><svg class="i"><use href="#i-file"/></svg></div><span class="badge neutral dot">Planned</span></div><h3>Xero</h3><p>Reconcile Xero against Scutoid and see the differences explained.</p></article>
+    </div>
+    <div class="grid3 int-points">
+      <div><b>Checked before it syncs</b><p>Compliance AI flags missing tax details or mismatches first.</p></div>
+      <div><b>One trail for every sync</b><p>See what moved, when, and who approved it.</p></div>
+      <div><b>You stay in control</b><p>Syncs that change records wait for a signed approval.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="early-access">
+  <div class="wrap cta-in">
+    <div>
+      <h2>Get access to Compliance AI.</h2>
+      <p>Book a demo. Tell us about your business and we will get in touch to walk you through it.</p>
+    </div>
+    <form class="form" id="form" novalidate>
+      <label>Work email<input type="email" name="email" placeholder="you@company.com" required></label>
+      <label>Company<input type="text" name="company" placeholder="Company name" required></label>
+      <button class="btn t1 lg" type="submit">Book a Demo</button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+
+</main>
+<footer class="footer" id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="logo" href="index.html"><img src="assets/Scutoid_Logo_Dark_2.png" alt="Scutoid" height="28"><span class="logo-tag">AI Labs</span></a>
+      <p class="foot-note">AI-native solutions for the Scutoid Works product suite.</p>
+    </div>
+    <div><h5>Native AI</h5><a href="index.html#capabilities">Compliance AI</a><a href="index.html#agents">Agents</a><a href="index.html#workflows">Workflows</a></div>
+    <div><h5>Products</h5><a href="products.html?suite=works">Scutoid Works</a><a href="products.html?suite=space">Scutoid Space</a><a href="products.html?suite=space&p=mcc">Mission Command Center</a><a href="products.html?suite=space&p=eo">Earth Observation</a></div>
+    <div><h5>Company</h5><a href="about.html">About</a><a href="about.html#services">Services</a><a href="about.html#research">Research</a><a href="index.html#early-access">Book a demo</a><a href="mailto:hello@scutoid.ai">Contact</a></div>
+  </div>
+  <div class="wrap foot-base"><span>© 2026 Scutoid AI Labs. All rights reserved.</span><span>Privacy · Terms</span></div>
+</footer>
+<script src="site.js"></script>
+<script src="home.js"></script>
+</body>
+</html>
