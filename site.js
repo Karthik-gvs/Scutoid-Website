@@ -72,3 +72,26 @@ megas.forEach(item => {
     t = setTimeout(() => { item.classList.remove('open'); delete item.dataset.hover; btn.setAttribute('aria-expanded', 'false'); }, 280);
   });
 });
+
+/* Floating section bars: when the active tab changes (scroll-spy or tap), slide the bar so it stays in view (matters on small screens) */
+(function () {
+  const bars = [...document.querySelectorAll('.subnav')];
+  if (!bars.length) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveal = bar => {
+    bar.querySelectorAll('.sn-products, .sn-secs').forEach(box => {
+      const cur = box.querySelector('[aria-current="true"]');
+      if (!cur || box.scrollWidth <= box.clientWidth + 1) return;
+      const c = box.getBoundingClientRect(), b = cur.getBoundingClientRect();
+      const left = box.scrollLeft + (b.left - c.left) - (c.width - b.width) / 2;
+      box.scrollTo({ left: Math.max(0, left), behavior: reduce ? 'auto' : 'smooth' });
+    });
+  };
+  bars.forEach(bar => {
+    let q = 0;
+    new MutationObserver(() => { cancelAnimationFrame(q); q = requestAnimationFrame(() => reveal(bar)); })
+      .observe(bar, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-current'] });
+    reveal(bar);
+  });
+  window.addEventListener('resize', () => bars.forEach(reveal));
+})();
