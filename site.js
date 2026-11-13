@@ -7,7 +7,7 @@ burger.addEventListener('click', () => {
 });
 menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
 
-// Mega menus open and close on click only. They stay open when the cursor moves away.
+// Mega menus open on hover (desktop pointers) or click. A click keeps one open; Esc or a click elsewhere closes it.
 const megas = [...document.querySelectorAll('.has-mega')];
 const closeMegas = except => megas.forEach(m => {
   if (m === except) return;
@@ -18,6 +18,7 @@ megas.forEach(item => {
   const btn = item.querySelector('.menu-btn');
   btn.addEventListener('click', () => {
     closeMegas(item);
+    if (item.dataset.hover) { delete item.dataset.hover; return; }   // opened by hover: a click keeps it open
     const open = item.classList.toggle('open');
     btn.setAttribute('aria-expanded', open);
   });
@@ -53,3 +54,21 @@ document.addEventListener('pointermove', e => {
     if (r.top < innerHeight && r.bottom > 0) requestAnimationFrame(() => reveal(el)); else io.observe(el);
   });
 })();
+
+// Hover to open on desktop widths with a mouse; closes shortly after the cursor leaves the menu item and its panel
+const hoverMQ = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1001px)');
+megas.forEach(item => {
+  const btn = item.querySelector('.menu-btn');
+  let t = 0;
+  item.addEventListener('mouseenter', () => {
+    if (!hoverMQ.matches) return;
+    clearTimeout(t);
+    closeMegas(item);
+    if (!item.classList.contains('open')) { item.classList.add('open'); item.dataset.hover = '1'; btn.setAttribute('aria-expanded', 'true'); }
+  });
+  item.addEventListener('mouseleave', () => {
+    if (!hoverMQ.matches || !item.dataset.hover) return;
+    clearTimeout(t);
+    t = setTimeout(() => { item.classList.remove('open'); delete item.dataset.hover; btn.setAttribute('aria-expanded', 'false'); }, 280);
+  });
+});

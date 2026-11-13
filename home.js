@@ -110,54 +110,96 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
     (warn ? '<path class="tick" d="M' + x + ' ' + (y - 6) + 'v7M' + x + ' ' + (y + 6) + 'h.1"/>' : '<path class="tick" d="M' + (x - 6) + ' ' + y + 'l4.5 5 8-9.5"/>'));
   const art = (inner, cap) => '<svg viewBox="0 0 800 400" aria-hidden="true" focusable="false">' + backdrop() + inner + '</svg><p class="art-cap">' + cap + '</p>';
 
+  const JIDS = ['J01 · Enquiry to production', 'J04, J05 · Design to change', 'J06, J07 · Plan to produce', 'J08 · Procure to pay', 'J06, J14 · Production and quality', 'J07 · Despatch', 'J09 · Invoice to payment received'];
+  const TIMES = ['8:40', '9:15', '10:30', '11:10', '2:00', '4:45', '5:30'];
   const CAPS = [
-    'A buyer wants to know one thing: can we bill this order? So they simply ask, in plain words.',
-    'The AI does not guess. It goes to Inventory and checks the goods arrived and passed inspection.',
-    'It lays the order, the receipt and the quality result side by side. One item needs a person.',
-    'It shows its checks and asks. The buyer decides, and the decision is recorded for good.'
+    "A parts list lands: 240 controller boards. Costed once at today's prices, the quote is ready for you to approve.",
+    "The order is won, then a connector moves to Rev C. Before anyone signs, the effect on stock and open orders is on screen.",
+    "Demand meets live stock and line capacity, and the plan assembles itself. Clear to build, except one connector: J7.",
+    "The J7 shortage becomes a purchase request. Three suppliers answer, and the best order is drafted for your approval.",
+    "Line 2 hums. An operator says 'reel 88 loaded', and every board remembers which reel it came from.",
+    "Boxes stacked, papers ready. The e-invoice and e-way bill are prepared before the truck is loaded.",
+    "The invoice goes out against the quote, with GST and e-invoice. The payment arrives, matches itself, and the true margin is known."
   ];
+  const clock = label => R(0.1, '<rect class="bubble" x="20" y="14" width="96" height="32" rx="16"/><circle class="g2" cx="40" cy="30" r="5"/>' + T(54, 36, label, 16));
+  const pillRow = (x, y, w, at, label, warn) => R(at, '<rect class="pill" x="' + x + '" y="' + y + '" width="' + w + '" height="44" rx="22"/><circle class="' + (warn ? 'warn-c' : 'g2') + '" cx="' + (x + 24) + '" cy="' + (y + 22) + '" r="9"/>' + T(x + 44, y + 28, label, 15));
+  const paperCard = (x, y, w, h2, at, inner) => R(at, '<rect class="paper" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h2 + '" rx="12"/>' + inner);
 
-  /* 1. The question */
-  const s1 = person(150, 0.1) +
-    R(0.5, '<rect class="bubble" x="190" y="104" width="256" height="62" rx="16"/><polygon class="bubble" points="206,166 230,166 192,196"/>' + T(210, 143, 'Can I bill PO-7710?', 22)) +
-    R(1.2, '<rect class="paper" x="320" y="196" width="170" height="108" rx="10"/><rect class="line" x="336" y="238" width="110" height="7" rx="3"/><rect class="line" x="336" y="254" width="80" height="7" rx="3"/>' + T(336, 222, 'PO-7710', 17) + T(336, 290, '₹4,81,440.00', 17, 't-m')) +
-    gem(620, 190, 1.3, 2.3) +
-    R(3.4, '<rect class="bubble" x="460" y="34" width="310" height="56" rx="16"/><polygon class="bubble" points="600,90 628,90 618,112"/>' + T(480, 69, 'Checking the goods first.', 20));
+  /* 1. 8:40  Quote: an email lands, a quote is drafted and approved */
+  const s1 = clock(TIMES[0]) + person(110, 0.1) +
+    R(0.3, '<rect class="paper" x="40" y="62" width="176" height="104" rx="10"/><path d="M40 72 L128 124 L216 72" fill="none" stroke="var(--outline-border)" stroke-width="2"/>' + T(128, 152, 'RFQ · 240 boards', 15, 't-m', 'middle')) +
+    gem(400, 160, 1.1, 1.2) + R(1.2, '<path class="beam" d="M220 112 C 290 100, 320 140, 350 158"/>') + R(2.2, '<path class="beam" d="M452 160 C 480 160, 500 150, 520 150"/>') +
+    paperCard(520, 62, 240, 190, 2.4, T(538, 94, 'Quote QT-2204', 17) + '<rect class="line" x="538" y="108" width="150" height="7" rx="3"/><rect class="line" x="538" y="124" width="110" height="7" rx="3"/>' + T(538, 176, '₹18,40,000', 30) + T(538, 204, 'Costed at today’s prices', 14, 't-m')) +
+    chk(745, 62, 0, 4.6) + R(4.6, T(640, 236, 'Approved by you', 15, '', 'middle'));
 
-  /* 2. The check */
-  const crate = (x, at, l1, l2) => '<rect class="crate" x="' + x + '" y="198" width="72" height="64" rx="6"/><path class="shelf" d="M' + x + ' 230h72M' + (x + 36) + ' 198v64"/>' +
-    R(at, T(x + 36, 290, l1, 14, '', 'middle') + T(x + 36, 308, l2, 14, 't-m', 'middle')) + chk(x + 36, 170, 0, at);
-  const beam = (x, at) => R(at, '<path class="beam" d="M212 168 C 250 80, ' + (x - 10) + ' 90, ' + (x + 36) + ' 176"/>');
-  const s2 = '<path class="shelf" d="M400 90v178M780 90v178M392 266h396"/>' +
-    gem(165, 190, 1.4, 0.1) +
-    R(0.2, '<rect class="paper" x="70" y="268" width="110" height="46" rx="8"/>' + T(125, 297, 'PO-7710', 16, '', 'middle')) +
-    beam(420, 1.2) + beam(512, 3.2) + beam(604, 5.2) + beam(696, 7) +
-    crate(420, 1.2, 'GRN-2291', '240 of 240') + crate(512, 3.2, 'QC-1187', '240 accepted') + crate(604, 5.2, 'Quality hold', 'none open') + crate(696, 7, 'Delivery', '2 days early');
+  /* 2. 9:15  Design: Rev C, and the ripple it makes */
+  const bx = (x, y, w, t, at, hi) => R(at, '<rect class="' + (hi ? 'decide' : 'paper') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="46" rx="10"/>' + T(x + w / 2, y + 29, t, 16, '', 'middle'));
+  const s2 = clock(TIMES[1]) + gem(100, 170, 1.1, 0.2) +
+    bx(300, 36, 200, 'Controller board', 0.3) +
+    R(0.6, '<path class="link" d="M400 82V108M245 108H605M245 108V128M425 108V128M605 108V128"/>') +
+    bx(170, 128, 150, 'Main PCB', 0.9) + bx(350, 128, 150, 'Enclosure', 1.2) + bx(530, 128, 150, 'Connector J7', 1.5, true) +
+    R(2, '<circle class="g2" cx="726" cy="128" r="26"/>' + T(726, 133, 'Rev C', 13, 't-w', 'middle')) +
+    R(2.6, '<circle class="beam" cx="605" cy="151" r="52"/><circle class="beam" cx="605" cy="151" r="88"/>') +
+    pillRow(120, 248, 200, 3.4, '2 open work orders') + pillRow(335, 248, 190, 4.2, '1 reel in stock') + pillRow(540, 248, 230, 5, 'Takes effect from board 0101');
 
-  /* 3. The match */
-  const doc = (x, at, title, l1, l2) => R(at, '<rect class="paper" x="' + x + '" y="62" width="180" height="150" rx="12"/>' + T(x + 16, 92, title, 17) +
-    '<rect class="line" x="' + (x + 16) + '" y="108" width="148" height="7" rx="3"/><rect class="line" x="' + (x + 16) + '" y="124" width="110" height="7" rx="3"/>' + T(x + 16, 168, l1, 22) + T(x + 16, 194, l2, 15, 't-m'));
-  const pill = (x, at, label, warn) => R(at, '<rect class="pill" x="' + x + '" y="246" width="176" height="46" rx="23"/><circle class="' + (warn ? 'warn-c' : 'ok-c') + '" cx="' + (x + 26) + '" cy="269" r="13"/>' +
-    (warn ? '<path class="tick" d="M' + (x + 26) + ' 263v7M' + (x + 26) + ' 275h.1"/>' : '<path class="tick" d="M' + (x + 20) + ' 269l4.5 5 8-9.5"/>') + T(x + 48, 275, label, 16));
-  const s3 = R(0.1, '<rect class="bubble" x="296" y="12" width="208" height="34" rx="17"/>' + T(400, 35, 'AI is matching', 16, '', 'middle')) + gem(318, 29, 0.42, 0.1) +
-    doc(50, 0.4, 'Purchase order', '240 units', '₹1,700.00 each') + doc(310, 1, 'Goods receipt', '240 received', 'GRN-2291') + doc(570, 1.6, 'Quality result', '240 accepted', '0 rejected') +
-    R(2.3, '<path class="link" d="M230 137H310"/><path class="link" d="M490 137H570"/>') + chk(270, 137, 0, 2.3) + chk(530, 137, 0, 2.5) +
-    pill(30, 3, 'Quantity') + pill(218, 4, 'Rate') + pill(406, 5, 'Supplier tax') + pill(594, 6, 'Tax at source', true);
+  /* 3. 10:30  Plan: bars slot onto the lines, one flag goes up */
+  const lane = (y, label) => T(36, y + 21, label, 14, 't-m');
+  const bar = (x, y, w, at, cls) => R(at, '<rect class="' + cls + '" x="' + x + '" y="' + y + '" width="' + w + '" height="30" rx="8"/>');
+  const s3 = clock(TIMES[2]) + lane(80, 'Line 1') + lane(130, 'Line 2') + lane(180, 'Line 3') +
+    bar(110, 80, 220, 0.5, 'g2') + bar(290, 130, 240, 1.1, 'g1') + bar(170, 180, 270, 1.7, 'g3') + bar(340, 80, 180, 2.2, 'g1') +
+    R(2.9, '<path class="link" d="M560 62V236"/><rect class="warn-c" x="560" y="62" width="104" height="28" rx="6"/>' + T(612, 81, 'J7 short', 14, 't-w', 'middle')) +
+    gem(700, 175, 1.2, 3.5) +
+    R(4.2, '<rect class="bubble" x="380" y="256" width="340" height="44" rx="14"/>' + T(400, 285, 'Clear to build, except J7.', 19));
 
-  /* 4. The decision */
-  const li = (i, at, txt, warn) => chk(262, 134 + i * 31, 0, at, warn) + R(at, T(286, 140 + i * 31, txt, 16, warn ? '' : 't-m'));
-  const s4 = person(110, 0.1) + R(0.3, '<path class="arm" d="M128 262 C 160 262, 196 250, 226 232"/>') +
-    R(0.6, '<rect class="decide" x="236" y="30" width="360" height="282" rx="18"/>' + T(256, 66, 'PO-7710 is ready to bill.', 20) + T(256, 92, 'Create the bill for ₹4,81,440.00?', 17, 't-m')) +
-    li(0, 1.6, 'Goods received · GRN-2291') + li(1, 2.4, 'Quality passed · QC-1187') + li(2, 3.2, 'Quantity and rate match') + li(3, 4, 'Supplier tax verified') + li(4, 4.8, 'Tax at source: please review', true) +
-    R(6, '<rect class="btn-g" x="376" y="274" width="92" height="30" rx="8"/>' + T(422, 295, 'Not now', 15, '', 'middle') + '<rect class="btn-p" x="478" y="274" width="104" height="30" rx="8"/>' + T(530, 295, 'Create bill', 15, 't-w', 'middle')) +
-    gem(690, 160, 1.3, 0.4) +
-    R(6.9, '<rect class="bubble" x="612" y="250" width="156" height="40" rx="20"/>' + T(690, 276, 'Decision recorded', 15, '', 'middle'));
+  /* 4. 11:10  Buy: three quotes, one winner, one tap */
+  const qc = (x, at, name, price, days) => paperCard(x, 66, 165, 146, at, T(x + 14, 96, name, 16) + T(x + 14, 142, price, 22) + T(x + 14, 168, days, 14, 't-m') + '<rect class="line" x="' + (x + 14) + '" y="184" width="110" height="7" rx="3"/>');
+  const s4 = clock(TIMES[3]) +
+    qc(30, 0.4, 'Orion Tooling', '₹5,02,900', '5 days') + qc(205, 0.9, 'Mehta Castings', '₹4,81,440', '6 days') + qc(380, 1.4, 'Kaveri Steels', '₹4,95,000', '9 days') +
+    R(3, '<rect class="ring" x="203" y="64" width="169" height="150" rx="13"/><rect class="ok-c" x="238" y="52" width="100" height="24" rx="12"/>' + T(288, 69, 'Best overall', 12, 't-w', 'middle')) +
+    gem(660, 262, 0.8, 2.6) + R(2.6, '<path class="beam" d="M628 252 C 520 290, 380 270, 300 222"/>') +
+    paperCard(585, 66, 190, 132, 3.8, T(603, 96, 'PO-7710', 17) + T(603, 124, '₹4,81,440.00', 20) + T(603, 148, 'Mehta Castings', 14, 't-m') + '<rect class="warn-c" x="603" y="162" width="104" height="22" rx="11"/>' + T(655, 178, 'For approval', 12, 't-w', 'middle')) +
+    chk(758, 66, 0, 5.8) + R(5.8, T(680, 222, 'Sent to supplier', 15, '', 'middle'));
+
+  /* 5. 2:00  Make: Line 2, a voice, and boards that remember */
+  const brd = (x, at) => R(at, '<rect class="ok-c" x="' + x + '" y="242" width="46" height="18" rx="3"/><rect class="line" x="' + (x + 8) + '" y="247" width="14" height="8"/>');
+  const s5 = clock(TIMES[4]) + person(110, 0.1) + R(0.1, '<path class="arm" style="stroke-width:4" d="M90 196 C 90 172, 130 172, 130 196"/>') +
+    R(0.3, '<rect class="paper" x="40" y="262" width="720" height="22" rx="11"/>') +
+    paperCard(320, 120, 170, 142, 0.3, T(405, 150, 'Line 2', 16, '', 'middle') + '<rect class="g1" x="340" y="168" width="130" height="14" rx="4"/><rect class="line" x="340" y="192" width="90" height="8" rx="3"/>') +
+    brd(210, 0.5) + brd(260, 0.9) + brd(520, 3.6) + brd(580, 4) + brd(640, 4.4) +
+    R(1.4, '<rect class="bubble" x="150" y="92" width="176" height="44" rx="14"/><polygon class="bubble" points="166,136 186,136 140,176"/>' + T(166, 121, 'Reel 88 loaded.', 18)) +
+    R(2.4, '<rect class="bubble" x="330" y="70" width="150" height="30" rx="15"/>' + T(405, 90, 'R-88 · lot L-0412', 13, '', 'middle') + '<path class="beam" d="M405 102V118"/>') +
+    chk(580, 216, 0, 4.2) + R(4.2, T(580, 198, 'Board 0007 traced', 14, '', 'middle')) +
+    gem(700, 150, 0.9, 3.8) +
+    R(5.4, '<rect class="bubble" x="560" y="90" width="150" height="34" rx="17"/>' + T(635, 112, '0 defects so far', 14, '', 'middle'));
+
+  /* 6. 4:45  Deliver: stacked boxes, papers ready, truck waiting */
+  const cr = (i, at) => R(at, '<rect class="crate" x="' + (50 + (i % 3) * 62) + '" y="' + (270 - Math.floor(i / 3) * 54) + '" width="58" height="52" rx="5"/>');
+  const s6 = clock(TIMES[5]) + cr(0, 0.3) + cr(1, 0.5) + cr(2, 0.7) + cr(3, 0.9) + cr(4, 1.1) + cr(5, 1.3) +
+    R(1.6, '<rect class="paper" x="420" y="190" width="220" height="90" rx="10"/><path class="paper" d="M640 214h46l32 32v34h-78z"/><circle class="ink" cx="470" cy="284" r="16"/><circle class="ink" cx="690" cy="284" r="16"/>' + T(530, 242, 'SO-4410', 18, '', 'middle')) +
+    paperCard(230, 44, 150, 96, 2, T(246, 74, 'E-invoice', 16) + '<rect class="line" x="246" y="90" width="100" height="7" rx="3"/><rect class="line" x="246" y="106" width="70" height="7" rx="3"/>') + chk(366, 44, 0, 2.5) +
+    paperCard(400, 44, 150, 96, 3, T(416, 74, 'E-way bill', 16) + '<rect class="line" x="416" y="90" width="100" height="7" rx="3"/><rect class="line" x="416" y="106" width="70" height="7" rx="3"/>') + chk(536, 44, 0, 3.5) +
+    gem(660, 100, 0.9, 4.2) +
+    R(4.8, '<rect class="bubble" x="250" y="146" width="300" height="32" rx="16"/>' + T(400, 168, 'Prepared for your approval', 15, '', 'middle'));
+
+  /* 7. 5:30  Account: invoice the customer against the quote, collect payment, know the margin */
+  const li = (i, at, txt) => chk(262, 134 + i * 31, 0, at) + R(at, T(286, 140 + i * 31, txt, 16, 't-m'));
+  const s7 = clock(TIMES[6]) + person(110, 0.1) + R(0.3, '<path class="arm" d="M128 262 C 160 262, 196 250, 226 232"/>') +
+    R(0.6, '<rect class="decide" x="236" y="30" width="360" height="282" rx="18"/>' + T(256, 66, 'Invoice INV-3081 is ready.', 20) + T(256, 92, 'Send ₹21,71,200.00 to Aarav Electronics?', 17, 't-m')) +
+    li(0, 1.4, 'Quote QT-2204, approved') + li(1, 2, 'Delivered: DN-1190') + li(2, 2.6, 'GST at 18%: ₹3,31,200.00') + li(3, 3.2, 'E-invoice number issued') + li(4, 3.8, 'Terms: payment in 30 days') +
+    R(4.6, '<rect class="btn-g" x="376" y="274" width="92" height="30" rx="8"/>' + T(422, 295, 'Not now', 15, '', 'middle') + '<rect class="btn-p" x="478" y="274" width="104" height="30" rx="8"/>' + T(530, 295, 'Send', 15, 't-w', 'middle')) +
+    gem(690, 90, 1.05, 0.4) +
+    R(5.4, '<rect class="bubble" x="612" y="150" width="156" height="34" rx="17"/>' + T(690, 172, 'Invoice sent', 15, '', 'middle')) +
+    R(6.6, '<rect class="ok-c" x="602" y="194" width="176" height="32" rx="16"/>' + T(690, 215, 'Payment received', 14, 't-w', 'middle') + T(690, 246, '₹21,71,200.00', 16, '', 'middle')) +
+    R(8, '<rect class="ok-c" x="596" y="260" width="190" height="30" rx="15"/>' + T(691, 280, 'Matched · margin known', 12.5, 't-w', 'middle'));
 
   const SCENES = [
-    { d: 6, title: 'Ask', cap: CAPS[0], html: art(s1, CAPS[0]) },
-    { d: 10, title: 'Verify in Inventory', cap: CAPS[1], html: art(s2, CAPS[1]) },
-    { d: 8, title: 'Match the records', cap: CAPS[2], html: art(s3, CAPS[2]) },
-    { d: 8, title: 'You decide', cap: CAPS[3], html: art(s4, CAPS[3]) }
+    { d: 6.5, title: 'Quote', cap: CAPS[0], html: art(s1, CAPS[0]) },
+    { d: 6.5, title: 'Design', cap: CAPS[1], html: art(s2, CAPS[1]) },
+    { d: 6.5, title: 'Plan', cap: CAPS[2], html: art(s3, CAPS[2]) },
+    { d: 7, title: 'Buy', cap: CAPS[3], html: art(s4, CAPS[3]) },
+    { d: 7, title: 'Make', cap: CAPS[4], html: art(s5, CAPS[4]) },
+    { d: 6, title: 'Deliver', cap: CAPS[5], html: art(s6, CAPS[5]) },
+    { d: 9.5, title: 'Account', cap: CAPS[6], html: art(s7, CAPS[6]) }
   ];
   const TOTAL = SCENES.reduce((s, x) => s + x.d, 0);
   const starts = []; SCENES.reduce((s, x) => (starts.push(s), s + x.d), 0);
@@ -183,6 +225,8 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
       const at = +n.dataset.at, until = n.dataset.until ? +n.dataset.until : Infinity;
       n.classList.toggle('on', el >= at && el < until);
     });
+    const snT = document.getElementById('snTime'), snS = document.getElementById('snStage');
+    if (snT && snT.textContent !== TIMES[si]) { snT.textContent = TIMES[si]; snS.textContent = SCENES[si].title + ' · ' + JIDS[si]; }
     btns.forEach((b, i) => {
       if (i === si) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
       b.classList.toggle('done', i < si);
@@ -205,7 +249,7 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
     else pause();
   }, { threshold: 0.4 }).observe(document.getElementById('vid'));
 
-  apply(4.2);   // poster frame: first scene, fully drawn
+  apply(4.6);   // poster frame: first scene, fully drawn
 })();
 
 

@@ -1148,3 +1148,39 @@ body.demo-max{overflow:hidden}
 .hc-cap{margin-top:10px}
 @media(max-width:900px){.hero-cards{max-width:none}}
 @media(prefers-reduced-motion:reduce){.hero-cards .hc{transition:none}}
+
+/* ---------- Hover fix: the glass glint sits behind the text, labels get a real highlight ---------- */
+.glass,.subnav .subnav-in,.nav{isolation:isolate}
+.glass::after,.subnav .subnav-in::after,.nav::after{z-index:-1}
+.sn-products button:hover,.sn-secs button:hover{background:color-mix(in srgb,var(--brand) 16%,transparent);color:var(--fg)}
+.sn-products button[aria-current=true]:hover{background:var(--primary);color:var(--primary-fg)}
+.sn-secs button[aria-current=true]:hover{background:color-mix(in srgb,var(--primary) 18%,transparent)}
+.menu>a:hover,.menu-btn:hover,.menu-split:hover,.has-mega.open .menu-btn,.has-mega.open .menu-split{background:color-mix(in srgb,var(--brand) 14%,transparent);color:var(--fg)}
+.mega-in>a:hover,.mega-products .mega-group>a:hover,.mega-products .mega-group h6 a:hover{background:color-mix(in srgb,var(--brand) 12%,var(--card));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--brand) 35%,var(--border))}
+
+/* ---------- Dropdown: unrolls from the top, then the items follow one by one ---------- */
+@media(min-width:1001px){
+  .mega{opacity:0;visibility:hidden;transform:translateY(-8px);clip-path:inset(0 -48px 100% -48px);
+    transition:clip-path .32s cubic-bezier(.4,0,.8,.4),opacity .25s ease,transform .32s ease,visibility 0s linear .32s}
+  .has-mega.open .mega{opacity:1;visibility:visible;transform:none;clip-path:inset(0 -48px -64px -48px);
+    transition:clip-path .6s cubic-bezier(.22,.7,.2,1),opacity .35s ease,transform .6s cubic-bezier(.22,.7,.2,1),visibility 0s}
+  .mega-in>*,.mega-products .mega-group>a,.mega-products .mega-group>h6{opacity:0;transform:translateY(12px);transition:opacity .2s ease,transform .2s ease}
+  .has-mega.open .mega-in>*,.has-mega.open .mega-products .mega-group>a,.has-mega.open .mega-products .mega-group>h6{opacity:1;transform:none;
+    transition:opacity .45s ease,transform .5s cubic-bezier(.22,.7,.2,1);transition-delay:calc(var(--i,0) * 55ms + 160ms)}
+  .mega-in>*:nth-child(1),.mega-group>*:nth-child(1){--i:0}.mega-in>*:nth-child(2),.mega-group>*:nth-child(2){--i:1}
+  .mega-in>*:nth-child(3),.mega-group>*:nth-child(3){--i:2}.mega-in>*:nth-child(4),.mega-group>*:nth-child(4){--i:3}
+  .mega-in>*:nth-child(5),.mega-group>*:nth-child(5){--i:4}.mega-group>*:nth-child(6){--i:5}
+  .mega-group>*:nth-child(7){--i:6}.mega-group>*:nth-child(8){--i:7}.mega-group>*:nth-child(9){--i:8}
+  .mega-products .mega-group.space{--g:4}
+}
+@media(max-width:1000px){.mega,.has-mega.open .mega{clip-path:none;transition:none}.mega-in>*,.mega-group>*{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.mega,.has-mega.open .mega,.mega-in>*,.mega-group>*{transition:none!important}}
+
+/* ---------- Story: running clock and ring ---------- */
+.art .ring{fill:none;stroke:var(--green);stroke-width:4}
+.story-now{display:flex;align-items:baseline;gap:14px;margin-top:6px}
+.story-now b{font-size:clamp(46px,5.2vw,68px);font-weight:800;letter-spacing:-.04em;line-height:1.1;padding-bottom:.06em;background:linear-gradient(90deg,var(--brand),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums}
+.story-now span{font-size:20px;font-weight:700;color:var(--fg)}
+
+.story-now{flex-wrap:wrap}
+.story-now span{font-size:16px;line-height:1.3}
