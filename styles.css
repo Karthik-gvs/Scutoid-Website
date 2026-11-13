@@ -809,7 +809,7 @@ body.demo-max{overflow:hidden}
 .menu-split{display:inline-flex;align-items:center;border-radius:8px}
 .menu-split:hover,.has-mega.open .menu-split{background:var(--accent)}
 .menu>.has-mega .menu-link{display:inline-flex;align-items:center;font-size:14px;font-weight:500;color:var(--muted-fg);padding:8px 2px 8px 12px;border-radius:8px 0 0 8px}
-.menu>.has-mega .menu-btn{padding:8px 10px 8px 4px;border-radius:0 8px 8px 0;background:none}
+.menu>.has-mega .menu-btn{padding:8px 12px;border-radius:8px;background:none}
 .menu-split:hover .menu-link,.menu-split:hover .menu-btn,.has-mega.open .menu-link{color:var(--fg)}
 .has-mega.open .menu-btn,.menu-btn:hover{background:none}
 .mega-in{grid-template-columns:repeat(4,1fr)}
@@ -1184,3 +1184,4 @@ body.demo-max{overflow:hidden}
 
 .story-now{flex-wrap:wrap}
 .story-now span{font-size:16px;line-height:1.3}
+
