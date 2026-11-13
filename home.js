@@ -98,87 +98,125 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
 (function () {
   const stage = document.getElementById('vidStage');
   if (!stage) return;
-  const ic = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
-  const head = (cur, crumb) => `<div class="vs-head">${['Procurement', 'Inventory', 'Bookkeeping'].map(a => `<span class="vs-app${a === cur ? ' cur' : ''}">${a}</span>`).join('')}<span class="vs-crumb">${crumb}</span></div>`;
-  const row = (tone, title, sub, badge, at) => `<div class="crow rv" data-at="${at}"><span class="cdot ${tone === 'warn' ? 'warn' : ''}">${ic(tone === 'warn' ? 'alert' : 'check')}</span><div><b>${title}</b><small>${sub}</small></div><span class="badge ${tone === 'warn' ? 'orange' : 'green'} dot">${badge}</span></div>`;
-  const poCard = at => `<div class="vs-card rv" data-at="${at}"><h5>PO-7710 · Mehta Castings <span class="badge teal dot">Approved</span></h5>
-      <div class="lv"><span>Item</span><b>Gear housing blank</b></div><div class="lv"><span>Ordered</span><b>240 units</b></div>
-      <div class="lv"><span>Rate</span><b>₹1,700.00</b></div><div class="lv"><span>Order total</span><b>₹4,81,440.00</b></div></div>`;
+  /* Illustrated story. SVG groups reveal on a timeline (data-at); positioning lives on an outer <g> because .rv owns CSS transform. */
+  const T = (x, y, txt, size = 18, cls = '', anchor = 'start') => '<text x="' + x + '" y="' + y + '" font-size="' + size + '" text-anchor="' + anchor + '" class="' + cls + '">' + txt + '</text>';
+  const R = (at, inner, until) => '<g class="rv" data-at="' + at + '"' + (until ? ' data-until="' + until + '"' : '') + '>' + inner + '</g>';
+  const backdrop = () => '<rect class="sky" width="800" height="400"/><circle class="sun" cx="640" cy="110" r="84"/>' +
+    '<polygon class="hill" points="0,330 120,262 250,312 400,246 560,314 700,258 800,300 800,400 0,400"/><rect class="ground" y="330" width="800" height="70"/>';
+  const gem = (x, y, s, at) => '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')">' + R(at,
+    '<circle class="gem-glow" r="54"/><polygon class="g1" points="0,-40 34,-20 0,0 -34,-20"/><polygon class="g2" points="-34,-20 0,0 0,40 -34,20"/><polygon class="g3" points="34,-20 34,20 0,40 0,0"/>') + '</g>';
+  const person = (x, at) => R(at, '<circle class="ink" cx="' + x + '" cy="205" r="22"/><rect class="ink" x="' + (x - 28) + '" y="232" width="56" height="98" rx="24"/>');
+  const chk = (x, y, tone, at, warn) => R(at, '<circle class="' + (warn ? 'warn-c' : 'ok-c') + '" cx="' + x + '" cy="' + y + '" r="14"/>' +
+    (warn ? '<path class="tick" d="M' + x + ' ' + (y - 6) + 'v7M' + x + ' ' + (y + 6) + 'h.1"/>' : '<path class="tick" d="M' + (x - 6) + ' ' + y + 'l4.5 5 8-9.5"/>'));
+  const art = (inner, cap) => '<svg viewBox="0 0 800 400" aria-hidden="true" focusable="false">' + backdrop() + inner + '</svg><p class="art-cap">' + cap + '</p>';
+
+  const CAPS = [
+    'A buyer wants to know one thing: can we bill this order? So they simply ask, in plain words.',
+    'The AI does not guess. It goes to Inventory and checks the goods arrived and passed inspection.',
+    'It lays the order, the receipt and the quality result side by side. One item needs a person.',
+    'It shows its checks and asks. The buyer decides, and the decision is recorded for good.'
+  ];
+
+  /* 1. The question */
+  const s1 = person(150, 0.1) +
+    R(0.5, '<rect class="bubble" x="190" y="104" width="256" height="62" rx="16"/><polygon class="bubble" points="206,166 230,166 192,196"/>' + T(210, 143, 'Can I bill PO-7710?', 22)) +
+    R(1.2, '<rect class="paper" x="320" y="196" width="170" height="108" rx="10"/><rect class="line" x="336" y="238" width="110" height="7" rx="3"/><rect class="line" x="336" y="254" width="80" height="7" rx="3"/>' + T(336, 222, 'PO-7710', 17) + T(336, 290, '₹4,81,440.00', 17, 't-m')) +
+    gem(620, 190, 1.3, 2.3) +
+    R(3.4, '<rect class="bubble" x="460" y="34" width="310" height="56" rx="16"/><polygon class="bubble" points="600,90 628,90 618,112"/>' + T(480, 69, 'Checking the goods first.', 20));
+
+  /* 2. The check */
+  const crate = (x, at, l1, l2) => '<rect class="crate" x="' + x + '" y="198" width="72" height="64" rx="6"/><path class="shelf" d="M' + x + ' 230h72M' + (x + 36) + ' 198v64"/>' +
+    R(at, T(x + 36, 290, l1, 14, '', 'middle') + T(x + 36, 308, l2, 14, 't-m', 'middle')) + chk(x + 36, 170, 0, at);
+  const beam = (x, at) => R(at, '<path class="beam" d="M212 168 C 250 80, ' + (x - 10) + ' 90, ' + (x + 36) + ' 176"/>');
+  const s2 = '<path class="shelf" d="M400 90v178M780 90v178M392 266h396"/>' +
+    gem(165, 190, 1.4, 0.1) +
+    R(0.2, '<rect class="paper" x="70" y="268" width="110" height="46" rx="8"/>' + T(125, 297, 'PO-7710', 16, '', 'middle')) +
+    beam(420, 1.2) + beam(512, 3.2) + beam(604, 5.2) + beam(696, 7) +
+    crate(420, 1.2, 'GRN-2291', '240 of 240') + crate(512, 3.2, 'QC-1187', '240 accepted') + crate(604, 5.2, 'Quality hold', 'none open') + crate(696, 7, 'Delivery', '2 days early');
+
+  /* 3. The match */
+  const doc = (x, at, title, l1, l2) => R(at, '<rect class="paper" x="' + x + '" y="62" width="180" height="150" rx="12"/>' + T(x + 16, 92, title, 17) +
+    '<rect class="line" x="' + (x + 16) + '" y="108" width="148" height="7" rx="3"/><rect class="line" x="' + (x + 16) + '" y="124" width="110" height="7" rx="3"/>' + T(x + 16, 168, l1, 22) + T(x + 16, 194, l2, 15, 't-m'));
+  const pill = (x, at, label, warn) => R(at, '<rect class="pill" x="' + x + '" y="246" width="176" height="46" rx="23"/><circle class="' + (warn ? 'warn-c' : 'ok-c') + '" cx="' + (x + 26) + '" cy="269" r="13"/>' +
+    (warn ? '<path class="tick" d="M' + (x + 26) + ' 263v7M' + (x + 26) + ' 275h.1"/>' : '<path class="tick" d="M' + (x + 20) + ' 269l4.5 5 8-9.5"/>') + T(x + 48, 275, label, 16));
+  const s3 = R(0.1, '<rect class="bubble" x="296" y="12" width="208" height="34" rx="17"/>' + T(400, 35, 'AI is matching', 16, '', 'middle')) + gem(318, 29, 0.42, 0.1) +
+    doc(50, 0.4, 'Purchase order', '240 units', '₹1,700.00 each') + doc(310, 1, 'Goods receipt', '240 received', 'GRN-2291') + doc(570, 1.6, 'Quality result', '240 accepted', '0 rejected') +
+    R(2.3, '<path class="link" d="M230 137H310"/><path class="link" d="M490 137H570"/>') + chk(270, 137, 0, 2.3) + chk(530, 137, 0, 2.5) +
+    pill(30, 3, 'Quantity') + pill(218, 4, 'Rate') + pill(406, 5, 'Supplier tax') + pill(594, 6, 'Tax at source', true);
+
+  /* 4. The decision */
+  const li = (i, at, txt, warn) => chk(262, 134 + i * 31, 0, at, warn) + R(at, T(286, 140 + i * 31, txt, 16, warn ? '' : 't-m'));
+  const s4 = person(110, 0.1) + R(0.3, '<path class="arm" d="M128 262 C 160 262, 196 250, 226 232"/>') +
+    R(0.6, '<rect class="decide" x="236" y="30" width="360" height="282" rx="18"/>' + T(256, 66, 'PO-7710 is ready to bill.', 20) + T(256, 92, 'Create the bill for ₹4,81,440.00?', 17, 't-m')) +
+    li(0, 1.6, 'Goods received · GRN-2291') + li(1, 2.4, 'Quality passed · QC-1187') + li(2, 3.2, 'Quantity and rate match') + li(3, 4, 'Supplier tax verified') + li(4, 4.8, 'Tax at source: please review', true) +
+    R(6, '<rect class="btn-g" x="376" y="274" width="92" height="30" rx="8"/>' + T(422, 295, 'Not now', 15, '', 'middle') + '<rect class="btn-p" x="478" y="274" width="104" height="30" rx="8"/>' + T(530, 295, 'Create bill', 15, 't-w', 'middle')) +
+    gem(690, 160, 1.3, 0.4) +
+    R(6.9, '<rect class="bubble" x="612" y="250" width="156" height="40" rx="20"/>' + T(690, 276, 'Decision recorded', 15, '', 'middle'));
 
   const SCENES = [
-    { d: 6, title: 'Ask', cap: 'You ask in plain language. Compliance AI starts from the purchase order.',
-      html: head('Procurement', 'Purchase Orders › PO-7710') + `<div class="vs-body two">${poCard(0.4)}
-        <div class="vs-chat"><div class="msg me rv" data-at="1.8">Can I bill PO-7710?</div>
-        <div class="msg ai rv" data-at="3.4">${ic('sparkles')}<span>Let me check that the goods are received and have passed quality in Inventory first.</span></div></div></div>` },
-    { d: 10, title: 'Verify in Inventory', cap: 'It verifies that every operation in Inventory is complete for this purchase order.',
-      html: head('Inventory', 'Inventory › Checks for PO-7710') + `<div class="vs-body"><div class="vs-card rv" data-at="0.3" style="width:100%"><h5>Compliance AI is checking Inventory ${'<span class="badge purple dot rv" data-at="0.3" data-until="8.4">Checking</span><span class="badge green dot rv" data-at="8.4">All complete</span>'}</h5>
-        ${row('ok', 'Goods receipt note GRN-2291', '240 of 240 units received on 22/11/2026', 'Complete', 1.2)}
-        ${row('ok', 'Quality inspection QC-1187', '240 accepted, 0 rejected', 'Passed', 3.2)}
-        ${row('ok', 'Quality hold', 'No open hold on batch B-0201', 'Clear', 5.2)}
-        ${row('ok', 'Delivery date', 'Received 2 days before the due date', 'On time', 7)}</div></div>` },
-    { d: 8, title: 'Match the records', cap: 'It matches the purchase order, receipt and quality results, and checks the supplier.',
-      html: head('Bookkeeping', 'Bills › Pre-bill checks') + `<div class="vs-body"><div class="vs-card rv" data-at="0.3" style="width:100%"><h5>Three-way match</h5>
-        <table class="vtable"><thead><tr><th>Check</th><th>Purchase order</th><th>Receipt and quality</th><th></th></tr></thead><tbody>
-        <tr class="rv" data-at="1"><td>Quantity</td><td>240</td><td>240 accepted</td><td class="ok">✓</td></tr>
-        <tr class="rv" data-at="2.2"><td>Rate</td><td>₹1,700.00</td><td>Not applicable</td><td class="ok">✓</td></tr>
-        <tr class="rv" data-at="3.4"><td>Supplier tax details</td><td>On file</td><td>Verified</td><td class="ok">✓</td></tr>
-        <tr class="rv" data-at="4.6"><td>Deduction at source</td><td>Not recorded</td><td>Needs your review</td><td style="color:var(--c-orange-fg);font-weight:700">!</td></tr></tbody></table></div></div>` },
-    { d: 8, title: 'Asks you', cap: 'It shows its checks, then asks you whether to create the bill. You decide.',
-      html: head('Procurement', 'Purchase Orders › PO-7710') + `<div class="vs-body two">${poCard(0.2)}
-        <div class="vs-card prompt rv" data-at="0.9"><div class="pq">${ic('sparkles')}<span>PO-7710 is ready to bill. Would you like me to create the bill for ₹4,81,440.00?</span></div>
-          ${row('ok', 'Goods received', 'GRN-2291 · 240 of 240 units', 'Complete', 2)}
-          ${row('ok', 'Quality inspection', 'QC-1187 · 240 accepted, 0 rejected', 'Passed', 2.8)}
-          ${row('ok', 'Quantity and rate match', 'Purchase order and receipt agree', 'Matched', 3.6)}
-          ${row('ok', 'Supplier tax details', 'Verified', 'Verified', 4.4)}
-          ${row('warn', 'Deduction at source', 'Check whether it applies to this bill', 'Review', 5.2)}
-          <div class="pact rv" data-at="6"><button class="btn t4 sm" type="button" tabindex="-1">Not Now</button><button class="btn t1 sm pulse-btn" type="button" tabindex="-1">Create Bill</button></div></div></div>` }
+    { d: 6, title: 'Ask', cap: CAPS[0], html: art(s1, CAPS[0]) },
+    { d: 10, title: 'Verify in Inventory', cap: CAPS[1], html: art(s2, CAPS[1]) },
+    { d: 8, title: 'Match the records', cap: CAPS[2], html: art(s3, CAPS[2]) },
+    { d: 8, title: 'You decide', cap: CAPS[3], html: art(s4, CAPS[3]) }
   ];
   const TOTAL = SCENES.reduce((s, x) => s + x.d, 0);
   const starts = []; SCENES.reduce((s, x) => (starts.push(s), s + x.d), 0);
 
-  stage.innerHTML = SCENES.map((s, i) => `<div class="vs" data-i="${i}">${s.html}</div>`).join('');
+  stage.innerHTML = SCENES.map((s, i) => `<div class="vs art" data-i="${i}">${s.html}</div>`).join('');
   const layers = [...stage.querySelectorAll('.vs')];
-  const big = document.getElementById('vidBig'), playBtn = document.getElementById('vidPlay'), seek = document.getElementById('vidSeek');
-  const timeEl = document.getElementById('vidTime'), capEl = document.getElementById('vidCap'), chaps = document.getElementById('vidChaps');
-  const ICON = {
-    play: '<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>',
-    pause: '<svg viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>',
-    replay: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>'
-  };
-  chaps.innerHTML = SCENES.map((s, i) => `<button type="button" data-i="${i}"><b>${i + 1}</b>${s.title}</button>`).join('');
-  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const STORY = CAPS;
+  const chaps = document.getElementById('vidChaps');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  chaps.innerHTML = SCENES.map((s, i) => `<li><button type="button" data-i="${i}" aria-label="Scene ${i + 1}: ${s.title}" title="${s.title}"><b>${i + 1}</b><i class="bar"><u></u></i></button></li>`).join('');
+  const btns = [...chaps.querySelectorAll('button')];
 
-  let t = 0, playing = false, last = 0, raf = 0;
+  let t = 0, playing = false, last = 0, raf = 0, wait = 0;
   function apply(tt) {
     let si = 0; starts.forEach((s, i) => { if (tt >= s) si = i; });
     const el = tt - starts[si];
-    layers.forEach((l, i) => l.classList.toggle('on', i === si));
+    layers.forEach((l, i) => {
+      l.classList.toggle('on', i === si);
+      l.style.setProperty('--d', i - si);                       // position on the storyboard strip
+      if (i !== si) l.querySelectorAll('[data-at]').forEach(n => n.classList.toggle('on', i < si));   // past frames stay drawn, future ones stay blank
+    });
     layers[si].querySelectorAll('[data-at]').forEach(n => {
       const at = +n.dataset.at, until = n.dataset.until ? +n.dataset.until : Infinity;
       n.classList.toggle('on', el >= at && el < until);
     });
-    capEl.textContent = SCENES[si].cap;
-    chaps.querySelectorAll('button').forEach((b, i) => { if (i === si) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
-    seek.value = Math.round(tt * 10);
-    timeEl.textContent = `${fmt(tt)} / ${fmt(TOTAL)}`;
+    btns.forEach((b, i) => {
+      if (i === si) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+      b.classList.toggle('done', i < si);
+      b.querySelector('u').style.width = (i < si ? 100 : i === si ? Math.min(100, el / SCENES[i].d * 100) : 0) + '%';
+    });
   }
-  function setBtn() { playBtn.innerHTML = playing ? ICON.pause : (t >= TOTAL ? ICON.replay : ICON.play); playBtn.setAttribute('aria-label', playing ? 'Pause' : (t >= TOTAL ? 'Replay' : 'Play')); }
   function tick(ts) {
     if (!playing) return;
     t = Math.min(TOTAL, t + (ts - last) / 1000); last = ts; apply(t);
-    if (t >= TOTAL) { playing = false; setBtn(); return; }
+    if (t >= TOTAL) { playing = false; wait = setTimeout(() => { t = 0; play(); }, 3500); return; }  // hold the last frame, then loop
     raf = requestAnimationFrame(tick);
   }
-  function play() { if (t >= TOTAL) t = 0; playing = true; big.classList.add('hide'); last = performance.now(); setBtn(); raf = requestAnimationFrame(tick); }
-  function pause() { playing = false; cancelAnimationFrame(raf); setBtn(); }
+  function play() { clearTimeout(wait); if (t >= TOTAL) t = 0; playing = true; last = performance.now(); raf = requestAnimationFrame(tick); }
+  function pause() { playing = false; clearTimeout(wait); cancelAnimationFrame(raf); }
 
-  big.addEventListener('click', play);
-  playBtn.addEventListener('click', () => (playing ? pause() : play()));
-  seek.addEventListener('input', () => { t = +seek.value / 10; big.classList.add('hide'); apply(t); setBtn(); });
-  chaps.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { t = starts[+b.dataset.i]; apply(t); play(); }));
-  // pause when scrolled out of view
-  new IntersectionObserver(es => { if (!es[0].isIntersecting && playing) pause(); }, { threshold: 0.2 }).observe(document.getElementById('vid'));
+  btns.forEach(b => b.addEventListener('click', () => { t = starts[+b.dataset.i]; apply(t); play(); }));
+  // start when scrolled into view, pause when out of view (stays still for reduced-motion users until a step is chosen)
+  new IntersectionObserver(es => {
+    if (es[0].isIntersecting) { if (!reduce && !playing) play(); }
+    else pause();
+  }, { threshold: 0.4 }).observe(document.getElementById('vid'));
 
-  apply(TOTAL - 0.4);   // poster frame: the final prompt, behind the play button
-  setBtn();
+  apply(4.2);   // poster frame: first scene, fully drawn
+})();
+
+
+/* ---------- Hero: glass event cards play the PO check in sequence (illustrative) ---------- */
+(function () {
+  const box = document.getElementById('heroCards');
+  if (!box) return;
+  const cards = [...box.querySelectorAll('.hc')];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const show = n => cards.forEach((c, i) => { c.classList.toggle('on', i === n); c.classList.toggle('past', i < n); });
+  if (reduce) { show(cards.length - 1); return; }
+  let n = -1;
+  setInterval(() => { n = n >= cards.length + 1 ? -1 : n + 1; if (n < 0) { cards.forEach(c => c.classList.remove('on', 'past')); return; } show(Math.min(n, cards.length - 1)); }, 1700);
 })();

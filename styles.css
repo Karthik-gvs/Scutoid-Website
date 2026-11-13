@@ -271,6 +271,7 @@ h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
 .agent p{margin-bottom:16px}
 .steps-mini{display:flex;gap:6px;flex-wrap:wrap}
 .steps-mini i{font-style:normal;font-size:12px;color:var(--muted-fg);background:var(--muted);padding:4px 10px;border-radius:6px}
+.agent .agent-where{font-size:13px;color:var(--muted-fg);margin:-6px 0 12px}
 .steps-mini i:not(:last-child)::after{content:" →";color:var(--subtle)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .steps li{background:rgb(255 255 255/.06);border:1px solid rgb(255 255 255/.12);border-radius:12px;padding:24px}
@@ -863,3 +864,270 @@ body.demo-max{overflow:hidden}
 .svc-list li b{color:var(--fg);font-weight:600}
 .svc-list .i{width:16px;height:16px;margin-top:3px;color:var(--success)}
 .svc-note{font-size:14px;color:var(--muted-fg);margin:16px 0 24px;text-align:center}
+.big .actions{justify-content:flex-start}
+
+/* ---------- Home walkthrough (compact, embedded; replaces the old player) ---------- */
+.hero{padding:56px 0 48px}
+.hero-copy{margin-bottom:28px}
+.walk{max-width:1040px;margin-top:0}
+.walk .vid-label{margin-bottom:12px}
+.walk-grid{display:grid;grid-template-columns:minmax(240px,300px) 1fr;gap:20px;align-items:stretch}
+.walk-steps{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0;padding:0}
+.walk-steps li{flex:1;display:flex}
+.walk-steps button{position:relative;overflow:hidden;width:100%;text-align:left;display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;padding:12px 14px 14px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--muted-fg);cursor:pointer;font:inherit;transition:border-color .2s,color .2s,box-shadow .2s}
+.walk-steps button:hover{border-color:var(--outline-border);color:var(--fg)}
+.walk-steps button b{width:24px;height:24px;border-radius:50%;background:var(--muted);color:var(--fg);display:grid;place-items:center;font-size:12px}
+.walk-steps strong{display:block;font-size:14px;font-weight:700;color:var(--fg)}
+.walk-steps em{display:none;font-style:normal;font-size:13px;line-height:1.4;margin-top:4px}
+.walk-steps button[aria-current=true]{border-color:var(--primary);color:var(--fg);box-shadow:var(--shadow-xs)}
+.walk-steps button[aria-current=true] em{display:block}
+.walk-steps button[aria-current=true] b,.walk-steps button.done b{background:var(--primary);color:var(--primary-fg)}
+.walk-steps .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent}
+.walk-steps .bar u{display:block;height:100%;width:0;background:var(--primary)}
+.walk-screen{border:1px solid var(--glass-border);border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:var(--glass-shadow)}
+.walk-screen .vid-stage{aspect-ratio:auto;min-height:0;height:400px}
+.walk-screen .vs{padding:14px 18px;gap:10px}
+.walk-screen .crow{padding:7px 0}
+.walk-screen .vs-card{padding:14px}
+.walk .caption{margin-top:12px}
+@media(max-width:860px){
+  .walk-grid{grid-template-columns:1fr}
+  .walk-steps{flex-direction:row;overflow-x:auto;gap:6px}
+  .walk-steps li{flex:0 0 auto}
+  .walk-steps button{width:auto;grid-template-columns:24px auto;align-items:center;padding:8px 12px 10px}
+  .walk-steps button[aria-current=true] em{display:none}
+  .walk-screen .vid-stage{height:430px}
+}
+
+/* ---------- Story section: the walkthrough is the artwork ---------- */
+.story{position:relative;padding:88px 0}
+.story-kicker{display:flex;gap:10px;align-items:center;justify-content:center;font-size:15px;font-weight:700;margin:0 0 16px}
+.story-kicker.mid{margin-top:56px}
+.story .walk{max-width:1080px;margin-inline:auto}
+.story .walk-steps em{font-size:13.5px;line-height:1.5}
+.story .walk-screen{background:var(--card);box-shadow:0 30px 70px -28px rgb(22 24 44/.4),0 0 0 8px color-mix(in srgb,var(--card) 60%,transparent)}
+.story .walk .caption{text-align:center}
+.story-ends .card{display:flex;flex-direction:column}
+.story-ends .actions{margin-top:auto;padding-top:20px;justify-content:flex-start}
+.story-vows{margin-top:28px}
+/* illustrated scenes */
+.story .walk-screen .vid-stage{height:auto;aspect-ratio:2/1;background:color-mix(in srgb,var(--brand) 8%,var(--card))}
+.vs.art{padding:0;gap:0;display:block}
+.vs.art svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vs.art text{font-family:inherit;font-weight:600;fill:var(--fg)}
+.vs.art .t-m{fill:var(--muted-fg);font-weight:500}
+.vs.art .t-w{fill:#fff}
+.art-cap{position:absolute;left:0;right:0;bottom:0;margin:0;padding:22px 18px 10px;font-size:14px;font-weight:600;color:var(--fg);text-align:center;background:linear-gradient(0deg,color-mix(in srgb,var(--card) 92%,transparent) 55%,transparent)}
+.art .sky{fill:var(--brand);fill-opacity:.07}
+.art .sun{fill:var(--purple);fill-opacity:.12}
+.art .hill{fill:var(--brand);fill-opacity:.14;stroke:var(--brand);stroke-opacity:.3;stroke-width:1.5}
+.art .ground{fill:var(--brand);fill-opacity:.2}
+.art .ink{fill:var(--primary)}
+.art .paper{fill:var(--card);stroke:var(--border);stroke-width:1.5}
+.art .line{fill:var(--muted)}
+.art .bubble{fill:var(--card);stroke:var(--outline-border);stroke-width:1.5}
+.art .beam{fill:none;stroke:var(--purple);stroke-width:2.5;stroke-dasharray:3 9;stroke-linecap:round;animation:artFlow 1.6s linear infinite}
+.art .crate{fill:var(--brand-light);stroke:var(--brand-dark);stroke-width:2}
+.art .shelf{fill:none;stroke:var(--brand-dark);stroke-opacity:.55;stroke-width:3}
+.art .ok-c{fill:var(--green)}
+.art .warn-c{fill:var(--orange)}
+.art .tick{fill:none;stroke:#fff;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.art .pill{fill:var(--card);stroke:var(--border);stroke-width:1.5}
+.art .link{fill:none;stroke:var(--brand);stroke-width:2.5;stroke-dasharray:4 7;stroke-linecap:round}
+.art .gem-glow{fill:var(--purple);fill-opacity:.16;transform-box:fill-box;transform-origin:center;animation:artPulse 2.6s ease-in-out infinite}
+.art .g1{fill:var(--brand-light)}.art .g2{fill:var(--brand)}.art .g3{fill:var(--brand-dark)}
+.art .decide{fill:var(--card);stroke:var(--purple);stroke-width:2.5}
+.art .btn-p{fill:var(--primary)}
+.art .btn-g{fill:none;stroke:var(--outline-border);stroke-width:1.5}
+.art .arm{fill:none;stroke:var(--primary);stroke-width:14;stroke-linecap:round}
+@keyframes artFlow{to{stroke-dashoffset:-12}}
+@keyframes artPulse{50%{transform:scale(1.22);fill-opacity:.06}}
+@media(prefers-reduced-motion:reduce){.art .beam,.art .gem-glow{animation:none}}
+@media(max-width:860px){.story{padding:64px 0}.story .walk-screen .vid-stage{height:auto;aspect-ratio:2/1}}
+
+/* ---------- Walkthrough: no side list; story lines are comments inside the video ---------- */
+.story .walk{max-width:860px}
+.story .walk-screen{position:relative}
+.story .walk-steps{position:absolute;top:10px;right:10px;z-index:5;display:flex;flex-direction:row;gap:6px;overflow:visible;margin:0;padding:0}
+.story .walk-steps li{flex:0 0 auto;display:block}
+.story .walk-steps button{width:28px;height:28px;padding:0;border-radius:50%;display:grid;place-items:center;grid-template-columns:none;background:color-mix(in srgb,var(--card) 88%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:var(--shadow-xs)}
+.story .walk-steps button b{width:auto;height:auto;background:none;font-size:12px;color:inherit}
+.story .walk-steps button[aria-current=true],.story .walk-steps button.done{border-color:var(--primary);background:var(--primary);color:var(--primary-fg)}
+.story .walk-steps button[aria-current=true] b,.story .walk-steps button.done b{background:none}
+.story .walk-steps .bar{display:none}
+.art-cap{left:50%;right:auto;bottom:12px;transform:translateX(-50%);width:min(88%,640px);padding:10px 16px;border-radius:14px;background:color-mix(in srgb,var(--card) 94%,transparent);border:1px solid var(--border);box-shadow:var(--shadow-xs);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:14px;line-height:1.4;font-weight:600}
+.art-cap::before{content:"";position:absolute;left:24px;top:-7px;width:12px;height:12px;background:inherit;border-left:1px solid var(--border);border-top:1px solid var(--border);transform:rotate(45deg)}
+@media(max-width:860px){.story .walk-steps{top:6px;right:6px}.art-cap{font-size:12.5px;padding:8px 12px;bottom:8px}}
+
+/* ---------- Home hero: dark artwork, glass event cards (after the beam.ai finance hero pattern) ---------- */
+:root .hero.hero-dark{background:radial-gradient(900px 520px at 12% 0%,rgba(45,162,181,.28),transparent 70%),radial-gradient(800px 520px at 95% 30%,rgba(156,45,183,.30),transparent 70%),linear-gradient(180deg,#0f1224 0%,#16182C 55%,#0b2433 100%);color:#fff;padding:72px 0 0;border-bottom:0}
+.hero-dark::before,.hero-dark::after{display:none}
+.hero-art{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero-art svg{width:100%;height:100%;display:block}
+.ha-facets polygon{fill:rgba(129,199,211,.05);stroke:rgba(129,199,211,.22);stroke-width:1.5}
+.ha-planet circle{fill:rgba(156,45,183,.14);stroke:rgba(196,129,212,.4);stroke-width:2}
+.ha-planet .ring{fill:none;stroke-opacity:.2;stroke-dasharray:3 9}
+.ha-orbit ellipse{fill:none;stroke:rgba(196,129,212,.5);stroke-dasharray:5 8;stroke-width:1.5}
+.ha-orbit .in{stroke-opacity:.5}
+.ha-stars circle{fill:#fff;fill-opacity:.55;animation:stTwinkle 4s ease-in-out infinite}
+.ha-stars circle:nth-child(odd){animation-delay:-2s}
+.ha-sat rect{fill:#C481D4}
+.ha-thread{fill:none;stroke:#81C7D3;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:3 12;animation:stFlow 2.4s linear infinite;opacity:.8}
+.ha-factory path,.ha-factory rect{fill:#fff;fill-opacity:.07}
+.ha-factory .lit{fill:#81C7D3;fill-opacity:.7;animation:stLit 3.2s ease-in-out infinite}
+.ha-factory .l2{animation-delay:-1.4s}
+.ha-factory .smoke{fill:#fff;fill-opacity:.1;animation:stSmoke 5s ease-out infinite}
+.ha-factory .s2{animation-delay:-1.7s}.ha-factory .s3{animation-delay:-3.3s}
+@keyframes stFlow{to{stroke-dashoffset:-15}}
+@keyframes stTwinkle{50%{fill-opacity:.12}}
+@keyframes stLit{50%{fill-opacity:.25}}
+@keyframes stSmoke{0%{opacity:0;transform:translateY(18px)}30%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;min-height:470px}
+.hero-dark .hero-copy{align-items:flex-start;text-align:left;margin:0}
+.hero-dark h1{color:#fff;max-width:14em}
+.hero-dark .lead{color:rgba(255,255,255,.78);text-align:left;margin-inline:0;max-width:34em}
+.hero-dark .actions{justify-content:flex-start}
+.hero-dark .btn-t1{background:#fff;color:var(--navy);border-color:#fff}
+.hero-dark .btn-t1:hover{background:#eef0f7}
+.hero-dark .btn-t2{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.hero-dark .btn-t2:hover{background:rgba(255,255,255,.16)}
+.hero-dark .badge.purple{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.hero-note{margin-top:18px;font-size:13px;color:rgba(255,255,255,.55)}
+.hero-cards{position:relative;display:flex;flex-direction:column;gap:12px;max-width:420px;margin-left:auto;width:100%}
+.hc{display:flex;gap:14px;align-items:center;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);box-shadow:0 18px 40px -18px rgba(0,0,0,.5);opacity:0;transform:translateY(16px) scale(.97);transition:opacity .6s ease,transform .6s ease}
+.hc.on{opacity:1;transform:none}
+.hc.past{opacity:.45;transform:scale(.97)}
+.hc b{display:block;font-size:16px;font-weight:700;color:#fff}
+.hc small{font-size:13px;color:rgba(255,255,255,.65)}
+.hc-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;background:rgba(255,255,255,.12)}
+.hc-ic.purple{background:rgba(156,45,183,.35);color:#E6B8F0}.hc-ic.green{background:rgba(58,213,138,.22);color:#6EE7B0}.hc-ic.orange{background:rgba(245,138,22,.25);color:#FDBA6B}
+.hc-ic .i{width:20px;height:20px}
+.hc-cap{font-size:12px;color:rgba(255,255,255,.5);margin-top:4px}
+.hero-strip{margin-top:44px;padding-bottom:30px;text-align:center}
+.hero-strip p{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px;font-weight:600}
+.hero-strip ul{list-style:none;display:flex;gap:10px 28px;justify-content:center;flex-wrap:wrap;margin:0;padding:0}
+.hero-strip li{display:flex;gap:9px;align-items:center;color:rgba(255,255,255,.85);font-size:15px;font-weight:600}
+.hero-strip img{display:block}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px;min-height:0}.hero-cards{margin:0;max-width:none}.hero-dark h1{max-width:none}.hero-art{opacity:.6}}
+@media(prefers-reduced-motion:reduce){.ha-stars circle,.ha-thread,.ha-factory *{animation:none!important}.hc{transition:none}}
+.ha-thread{opacity:.3}
+.hero-dark h1{font-size:clamp(32px,4.1vw,50px)}
+.hero-dark .hero-copy,.hero-dark .hc{position:relative;z-index:1}
+.story-ends .card .badge{align-self:flex-start}
+
+/* ---------- See it work: side-by-side, storyboard strip ---------- */
+.story-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:center}
+.story-text .label{margin-bottom:10px}
+.story-text h2{margin-bottom:12px}
+.story-text .sub{margin-bottom:18px}
+.story .story-walk{max-width:none;margin:0}
+.story .walk-screen{background:transparent;border:0;box-shadow:none;border-radius:0}
+.story .walk-screen .vid-stage{aspect-ratio:16/8.6;background:transparent;overflow:hidden;position:relative}
+.story .vs.art{inset:auto;left:6%;top:50%;width:88%;aspect-ratio:2/1;height:auto;padding:0;display:block;opacity:.4;visibility:visible;
+  border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:0 22px 50px -24px rgb(22 24 44/.45);
+  transform:translate(calc(var(--d,0) * 92%),-50%) scale(.9);
+  transition:transform .9s cubic-bezier(.22,.7,.2,1),opacity .6s ease}
+.story .vs.art.on{opacity:1;transform:translate(0,-50%) scale(1)}
+.story .vs.art[style*="--d: 2"],.story .vs.art[style*="--d: 3"],.story .vs.art[style*="--d: -2"],.story .vs.art[style*="--d: -3"]{opacity:0}
+.story .walk-steps{top:6px;right:8px}
+.story .walk .caption{text-align:left;margin-top:8px}
+.story .art-cap{font-size:13px;padding:8px 14px;bottom:8px;width:min(92%,560px)}
+@media(max-width:900px){
+  .story-split{grid-template-columns:1fr;gap:24px}
+  .story .walk .caption{text-align:center}
+}
+@media(prefers-reduced-motion:reduce){.story .vs.art{transition:none}}
+
+.story-lead{font-size:clamp(20px,2vw,26px);line-height:1.35;font-weight:600;letter-spacing:-.01em;color:var(--fg);margin-bottom:20px}
+
+/* ---------- Home personality: confidence, trust, fresh ---------- */
+.grad{background:linear-gradient(90deg,#81C7D3,#3AD58A 60%,#C481D4);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hl{background:linear-gradient(180deg,transparent 62%,color-mix(in srgb,var(--brand) 36%,transparent) 62%);color:inherit;border-radius:3px;padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.section.navy .hl{background:linear-gradient(180deg,transparent 62%,color-mix(in srgb,var(--brand-light) 45%,transparent) 62%)}
+.home .label{display:inline-flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12.5px;color:var(--brand-dark)}
+.home .label::before{content:"";width:22px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--brand),var(--purple))}
+:root[data-theme=dark] .home .label{color:var(--brand-light)}
+/* cards: lift and colour on hover */
+.home .agent,.home #capabilities .card,.home .story-ends .card,.home .int{transition:opacity .7s ease,transform .3s cubic-bezier(.22,.7,.2,1),box-shadow .3s ease,border-color .3s ease}
+.home .agent:hover,.home #capabilities .card:hover,.home .story-ends .card:hover,.home .int:hover{transform:translateY(-5px);box-shadow:0 22px 40px -22px rgba(22,24,44,.4);border-color:var(--brand)}
+#capabilities .card{border-top:4px solid var(--brand)}
+#capabilities .card:nth-child(2){border-top-color:var(--green)}
+#capabilities .card:nth-child(3){border-top-color:var(--purple)}
+#capabilities .card:nth-child(4){border-top-color:var(--orange)}
+/* modes: a confident light and dark pair */
+#modes .grid2 .card.big:first-child{background:linear-gradient(145deg,color-mix(in srgb,var(--brand) 16%,var(--card)),var(--card));border-color:color-mix(in srgb,var(--brand) 40%,var(--border))}
+#modes .grid2 .card.big:last-child{background:linear-gradient(145deg,#2a2d52,#16182C);border-color:#16182C;color:#fff}
+#modes .grid2 .card.big:last-child h3{color:#fff}
+#modes .grid2 .card.big:last-child p{color:rgba(255,255,255,.8)}
+#modes .grid2 .card.big:last-child .badge.purple{background:rgba(196,129,212,.25);color:#E6B8F0}
+/* scroll-in motion */
+.sr{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.7,.2,1)}
+.sr.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.sr{opacity:1;transform:none;transition:none}.home .agent{transition:none}}
+
+/* ---------- Home colour: tinted sections, coloured accents (no new sections) ---------- */
+.home .section.alt{background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 9%,var(--bg)),color-mix(in srgb,var(--purple) 6%,var(--bg)))}
+#commitment{background:linear-gradient(180deg,var(--bg),color-mix(in srgb,var(--brand) 6%,var(--bg)))}
+/* commitment cards: teal and purple identities */
+.story-ends .card:first-child{border-top:5px solid var(--brand);background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 9%,var(--card)),var(--card) 55%)}
+.story-ends .card:last-child{border-top:5px solid var(--purple);background:linear-gradient(180deg,color-mix(in srgb,var(--purple) 9%,var(--card)),var(--card) 55%)}
+.story-vows>div{border-left:4px solid var(--brand);padding-left:14px}
+.story-vows>div:nth-child(2){border-left-color:var(--purple)}.story-vows>div:nth-child(3){border-left-color:var(--pink)}
+/* agents: one colour each */
+#agents .agent{border-top:4px solid var(--brand)}
+#agents .agent:nth-child(2){border-top-color:var(--purple)}
+#agents .agent:nth-child(3){border-top-color:var(--green)}
+#agents .agent:nth-child(4){border-top-color:var(--orange)}
+#agents .agent:nth-child(5){border-top-color:var(--pink)}
+#agents .agent:nth-child(6){border-top-color:var(--blue)}
+#agents .agent-where{font-weight:600;color:var(--brand-dark)}
+:root[data-theme=dark] #agents .agent-where{color:var(--brand-light)}
+#agents .steps-mini i{background:color-mix(in srgb,var(--brand) 12%,var(--card))}
+/* capabilities tiles a touch stronger */
+#capabilities .tile{width:48px;height:48px;border-radius:14px}
+/* how it works: gradient step numbers */
+#how .steps li b{background:linear-gradient(135deg,var(--brand),var(--purple));color:#fff;border:0}
+/* workflow builder accent */
+.home .wf-in{border-top:4px solid var(--purple)}
+.home .wf-out{border-top:4px solid var(--brand)}
+/* integrations: coloured tops */
+#integrations .int{border-top:4px solid var(--blue)}
+#integrations .int:nth-child(2){border-top-color:var(--green)}
+#integrations .int:nth-child(3){border-top-color:var(--orange)}
+#integrations .int:nth-child(4){border-top-color:var(--purple)}
+#integrations .int-points b{color:var(--brand-dark)}
+:root[data-theme=dark] #integrations .int-points b{color:var(--brand-light)}
+/* CTA: a little warmth */
+.home .cta{background:radial-gradient(700px 360px at 90% 0%,rgba(156,45,183,.35),transparent 70%),radial-gradient(700px 360px at 0% 100%,rgba(45,162,181,.3),transparent 70%),var(--navy)}
+
+/* ---------- Same look on the inner pages and sign-in ---------- */
+:root .phero.hero-dark{background:radial-gradient(900px 520px at 12% 0%,rgba(45,162,181,.28),transparent 70%),radial-gradient(800px 520px at 95% 30%,rgba(156,45,183,.30),transparent 70%),linear-gradient(180deg,#0f1224 0%,#16182C 55%,#0b2433 100%);color:#fff;border-bottom:0}
+.phero.hero-dark h1{color:#fff;max-width:none;font-size:clamp(42px,6.4vw,76px)}
+.phero.hero-dark .lead{color:rgba(255,255,255,.78);text-align:center;margin-inline:auto}
+.phero.hero-dark .phero-tag{color:rgba(255,255,255,.7)}
+.phero.hero-dark .actions{justify-content:center}
+.phero.hero-dark .phero-try .inline{color:#81C7D3}
+.phero.hero-dark .suite-switch{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22)}
+.phero.hero-dark .suite-switch button{color:rgba(255,255,255,.75)}
+.phero.hero-dark .suite-switch button:hover{color:#fff}
+.phero.hero-dark .suite-switch button[aria-selected=true]{background:#fff;color:var(--navy)}
+.phero.hero-dark .pchip{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#fff}
+.phero.hero-dark .phero-bg .mfg{color:#81C7D3;opacity:.3}
+.phero.hero-dark .phero-bg .orbit{color:#C481D4;opacity:.45;display:block}
+/* coloured card tops, in rotation */
+.inner .section .grid3>.card.pad,.inner .section .grid4>.card.pad{border-top:4px solid var(--brand)}
+.inner .section .grid3>.card.pad:nth-child(3n+2),.inner .section .grid4>.card.pad:nth-child(4n+2){border-top-color:var(--purple)}
+.inner .section .grid3>.card.pad:nth-child(3n+3),.inner .section .grid4>.card.pad:nth-child(4n+3){border-top-color:var(--green)}
+.inner .section .grid4>.card.pad:nth-child(4n+4){border-top-color:var(--orange)}
+.inner .section .grid2>.card.pad:first-child{border-top:5px solid var(--brand)}
+.inner .section .grid2>.card.pad:last-child{border-top:5px solid var(--purple)}
+.inner .section .card.pad,.inner .pcard{transition:opacity .7s ease,transform .3s cubic-bezier(.22,.7,.2,1),box-shadow .3s ease,border-color .3s ease}
+.inner .section .card.pad:hover{transform:translateY(-4px);box-shadow:0 20px 36px -22px rgba(22,24,44,.4);border-color:var(--brand)}
+.inner .svc-top .badge{font-weight:700}
+.inner .hire li b{background:linear-gradient(135deg,var(--brand),var(--purple));color:#fff;border:0}
+/* sign-in */
+.login-body.home{background:radial-gradient(700px 420px at 10% 0%,rgba(45,162,181,.22),transparent 70%),radial-gradient(700px 420px at 95% 100%,rgba(156,45,183,.2),transparent 70%),var(--bg)}
+.login-body.home .login-card{border-top:5px solid var(--brand);box-shadow:0 30px 60px -30px rgba(22,24,44,.45);background-image:linear-gradient(180deg,color-mix(in srgb,var(--brand) 7%,var(--card)),var(--card) 40%)}
+.login-body.home .login-card h1{background:linear-gradient(90deg,var(--fg),var(--brand-dark));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+@media(prefers-reduced-motion:reduce){.inner .section .card.pad{transition:none}}
+.login-body.home .login-card h1{padding-bottom:.14em;line-height:1.2}

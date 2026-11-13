@@ -36,3 +36,20 @@ document.addEventListener('pointermove', e => {
   g.style.setProperty('--mx', (e.clientX - r.left) + 'px');
   g.style.setProperty('--my', (e.clientY - r.top) + 'px');
 }, { passive: true });
+
+
+/* Scroll-in motion for headings and cards (all pages; off for reduced motion) */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const sel = '.section .head, .section .card.pad, .section .steps li, .section .int-points > div, .story-vows > div, .hire li';
+  const els = [...document.querySelectorAll(sel)].filter(el => !el.closest('.frame, .walk, .wf'));
+  const reveal = el => { el.classList.add('in'); setTimeout(() => { el.style.transitionDelay = ''; }, 1400); };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), { threshold: 0.12 });
+  els.forEach(el => {
+    const sibs = [...el.parentElement.children].filter(c => els.includes(c));
+    el.style.transitionDelay = Math.min(sibs.indexOf(el), 5) * 80 + 'ms';
+    el.classList.add('sr');
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0) requestAnimationFrame(() => reveal(el)); else io.observe(el);
+  });
+})();

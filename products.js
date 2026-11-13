@@ -9,7 +9,7 @@ const PINK = { brand: '#E84271', dark: '#C73660', light: '#F18EAA', fg: '#FFFFFF
 const APPS = {
   plm: {
     label: 'PLM', logo: 'assets/1.PLM.png', accent: TEAL, crumb: 'Design', title: 'Parts', view: 'All Parts', newLabel: 'New Part',
-    kpis: [['Active parts', '1,248', 'purple', null, '+4.2%', 'up', 'across 18 assemblies'], ['Open changes', '14', 'blue', null, '−2', 'down', '3 awaiting approval'], ['Compliance flags', '3', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    kpis: [['Active parts', '1,248', 'purple', null, '+4.2%', 'up', 'across 18 assemblies'], ['Open changes', '14', 'blue', null, '−2', 'down', '3 awaiting approval'], ['AI flags', '3', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Part', 'Name', 'Phase', 'Revision', 'Owner'],
     rows: [
       { c: ['PRT-1042', 'Gear housing', ['Design', 'teal'], ['Rev C', 'outline'], 'A. Rao'], facts: [['Material', 'EN-GJL-250'], ['Used in', '3 assemblies']],
@@ -25,7 +25,7 @@ const APPS = {
   },
   mes: {
     label: 'MES', logo: 'assets/1.MES_Manufactoring.png', accent: TEAL, crumb: 'Manufacturing', title: 'Work Orders', view: 'All Work Orders', newLabel: 'New Work Order',
-    kpis: [['In progress', '23', 'blue', null, '+3', 'up', 'on 4 lines'], ['On hold', '2', 'orange', null, '+1', 'down', 'quality hold'], ['Compliance flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    kpis: [['In progress', '23', 'blue', null, '+3', 'up', 'on 4 lines'], ['On hold', '2', 'orange', null, '+1', 'down', 'quality hold'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Work order', 'Item', 'Quantity', 'Status', 'Due'],
     rows: [
       { c: ['WO-2231', 'Gear housing', '120', ['In Progress', 'orange'], '14/11/2026'], facts: [['Line', 'Line 2'], ['Batch', 'B-0192']],
@@ -41,7 +41,7 @@ const APPS = {
   },
   pro: {
     label: 'Procurement', logo: 'assets/1.Procurement.png', accent: TEAL, crumb: 'Buy', title: 'Purchase Orders', view: 'All Orders', newLabel: 'New Order',
-    kpis: [['Open orders', '38', 'blue', null, '+5', 'up', '₹62,40,000.00 committed'], ['Awaiting approval', '6', 'orange', null, '+2', 'down', 'oldest 3 days'], ['Compliance flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    kpis: [['Open orders', '38', 'blue', null, '+5', 'up', '₹62,40,000.00 committed'], ['Awaiting approval', '6', 'orange', null, '+2', 'down', 'oldest 3 days'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Order', 'Supplier', 'Amount', 'Status', 'Delivery'],
     rows: [
       { c: ['PO-7710', 'Mehta Castings', '₹4,81,440.00', ['Pending Approval', 'orange'], '24/11/2026'], facts: [['Item', 'Gear housing blank'], ['Terms', '30 days']],
@@ -57,7 +57,7 @@ const APPS = {
   },
   inv: {
     label: 'Inventory', logo: 'assets/1.Inventory.png', accent: TEAL, crumb: 'Stock', title: 'Batches', view: 'All Batches', newLabel: 'New Batch',
-    kpis: [['Items in stock', '3,420', 'blue', null, '+1.8%', 'up', 'across 4 locations'], ['With job workers', '5', 'orange', null, '+1', 'down', 'goods out'], ['Compliance flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    kpis: [['Items in stock', '3,420', 'blue', null, '+1.8%', 'up', 'across 4 locations'], ['With job workers', '5', 'orange', null, '+1', 'down', 'goods out'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Batch', 'Item', 'Quantity', 'Location', 'Status'],
     rows: [
       { c: ['B-0192', 'Rubber seal 40 mm', '1,200', 'Stores A', ['Active', 'green']], facts: [['Received', '02/10/2026'], ['Shelf life ends', '22/11/2026']],
@@ -70,9 +70,41 @@ const APPS = {
         find: [['warn', 'Linked to WO-2229, which is on hold.'], ['ok', 'Hold is recorded with a reason.']], next: 'Decide: release, rework or return to the supplier.' }
     ]
   },
-  bk: {
-    label: 'Bookkeeping', logo: 'assets/2.Books.png', accent: PINK, crumb: 'Purchases', title: 'Bills', view: 'All Bills', newLabel: 'New Bill',
-    kpis: [['Payables', '₹16,00,000.00', 'orange', null, '−4.1%', 'down', '12 bills due'], ['Receivables', '₹12,00,000.00', 'purple', null, '+8.2%', 'up', '7 overdue'], ['Compliance flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+  qua: {
+    label: 'Quality', logo: 'assets/3.Quality.svg', accent: TEAL, crumb: 'Assure', title: 'Corrective Actions', view: 'All Corrective Actions', newLabel: 'New Corrective Action',
+    kpis: [['Open corrective actions', '9', 'blue', null, '+2', 'up', '3 due this week'], ['Supplier requests', '4', 'orange', null, '+1', 'down', 'awaiting reply'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    cols: ['Action', 'Subject', 'Method', 'Status', 'Due'],
+    rows: [
+      { c: ['CA-0214', 'Solder bridging, Line 2', '8D', ['Root cause', 'orange'], '20/11/2026'], facts: [['Linked lot', 'B-0192'], ['Supplier', 'Mehta Castings']],
+        find: [['warn', 'The same defect was found in two other lots from this supplier.'], ['warn', 'The containment step has no owner.'], ['ok', 'Customer response clock is on track.']],
+        next: 'Assign a containment owner and add the supplier to this action.' },
+      { c: ['CA-0211', 'Dimension out of limit', '8D', ['Verification', 'blue'], '15/11/2026'], facts: [['Linked order', 'WO-2229'], ['Owner', 'S. Nair']],
+        find: [['ok', 'Root cause is recorded with evidence.'], ['ok', 'Effectiveness check is scheduled.']], next: 'No action needed.' },
+      { c: ['CA-0207', 'Missing test certificate', 'Supplier', ['Open', 'neutral'], '12/11/2026'], facts: [['Supplier', 'Sai Fasteners'], ['Raised', '29/10/2026']],
+        find: [['warn', 'The supplier has not replied and the response date has passed.']], next: 'Send a reminder and review the supplier score.' },
+      { c: ['CA-0199', 'Label misprint', 'Internal', ['Closed', 'green'], '05/11/2026'], facts: [['Linked lot', 'B-0176'], ['Closed on', '04/11/2026']],
+        find: [['ok', 'Effectiveness check passed.']], next: 'No action needed.' }
+    ]
+  },
+  pm: {
+    label: 'Project Management', logo: 'assets/3.Project.svg', accent: TEAL, crumb: 'Deliver', title: 'Projects', view: 'All Projects', newLabel: 'New Project',
+    kpis: [['Active projects', '11', 'blue', null, '+1', 'up', '2 at a stage gate'], ['Committed cost', '₹1,48,20,000.00', 'orange', null, '+6.4%', 'up', 'of ₹1,62,00,000.00 budget'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    cols: ['Project', 'Name', 'Type', 'Stage', 'Due'],
+    rows: [
+      { c: ['PRJ-031', 'Controller board, new product', 'NPI', ['Gate 3', 'orange'], '30/12/2026'], facts: [['Budget', '₹42,00,000.00'], ['Actual and committed', '₹38,70,000.00']],
+        find: [['warn', 'Committed cost is at 92% of budget with two tasks still open.'], ['warn', 'A purchase order for the enclosure is later than the milestone needs.'], ['ok', 'First-article tasks are on plan.']],
+        next: 'Review the budget with the project owner before the stage gate.' },
+      { c: ['PRJ-028', 'Test fixture, engineer to order', 'ETO', ['Build', 'blue'], '18/12/2026'], facts: [['Budget', '₹18,50,000.00'], ['Billing milestone', '50% on 01/12/2026']],
+        find: [['ok', 'Cost is within budget.'], ['ok', 'Billing milestone is on plan.']], next: 'No action needed.' },
+      { c: ['PRJ-025', 'Second line set-up', 'Plant', ['Plan', 'neutral'], '28/02/2027'], facts: [['Budget', '₹1,01,50,000.00'], ['Tasks', '46']],
+        find: [['warn', 'Two tasks depend on equipment with no purchase order yet.']], next: 'Raise the requests for the equipment so the dates hold.' },
+      { c: ['PRJ-022', 'Customer site installation', 'Install', ['Complete', 'green'], '05/11/2026'], facts: [['Budget', '₹6,80,000.00'], ['Final cost', '₹6,41,000.00']],
+        find: [['ok', 'Final cost is recorded against the budget.']], next: 'No action needed.' }
+    ]
+  },
+  fin: {
+    label: 'Finance', logo: 'assets/2.Books.png', accent: PINK, crumb: 'Purchases', title: 'Bills', view: 'All Bills', newLabel: 'New Bill',
+    kpis: [['Payables', '₹16,00,000.00', 'orange', null, '−4.1%', 'down', '12 bills due'], ['Receivables', '₹12,00,000.00', 'purple', null, '+8.2%', 'up', '7 overdue'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Bill', 'Supplier', 'Amount', 'Status', 'Due'],
     rows: [
       { c: ['BILL-0381', 'Mehta Castings', '₹4,81,440.00', ['Pending Approval', 'orange'], '20/11/2026'], facts: [['Order', 'PO-7710'], ['Terms', '30 days']],
@@ -93,7 +125,7 @@ const PURPLE = { brand: '#9C2DB7', dark: '#7A2491', light: '#C481D4', fg: '#FFFF
 Object.assign(APPS, {
   mcc: {
     label: 'Mission Command Center', short: 'MCC', logo: 'assets/space-mcc.svg', accent: PURPLE, crumb: 'Operations', title: 'Passes', view: 'All Passes', newLabel: 'New Pass',
-    kpis: [['Passes today', '14', 'blue', null, '+2', 'up', 'across 3 ground stations'], ['Awaiting review', '3', 'orange', null, '+1', 'down', 'second operator'], ['Compliance flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    kpis: [['Passes today', '14', 'blue', null, '+2', 'up', 'across 3 ground stations'], ['Awaiting review', '3', 'orange', null, '+1', 'down', 'second operator'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Pass', 'Spacecraft', 'Ground station', 'Status', 'Start (UTC)'],
     rows: [
       { c: ['P-0412', 'SAT-1', 'Station A', ['Pending Review', 'orange'], '14:32'], facts: [['Duration', '9 min'], ['Sequence', 'CS-118']],
@@ -109,7 +141,7 @@ Object.assign(APPS, {
   },
   eo: {
     label: 'Earth Observation', short: 'EO', logo: 'assets/space-eo.svg', accent: PURPLE, crumb: 'Data', title: 'Scenes', view: 'All Scenes', newLabel: 'New Order',
-    kpis: [['Scenes this week', '312', 'blue', null, '+8.4%', 'up', 'from 2 sensors'], ['Awaiting processing', '18', 'orange', null, '−4', 'up', 'oldest 2 hours'], ['Compliance flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
+    kpis: [['Scenes this week', '312', 'blue', null, '+8.4%', 'up', 'from 2 sensors'], ['Awaiting processing', '18', 'orange', null, '−4', 'up', 'oldest 2 hours'], ['AI flags', '2', 'purple', 'sparkles', '+1', 'down', 'to review']],
     cols: ['Scene', 'Area', 'Sensor', 'Status', 'Captured (UTC)'],
     rows: [
       { c: ['SC-88104', 'Coastal region 4', 'Optical', ['Processed', 'green'], '10/11/2026 06:12'], facts: [['Cloud cover', '6%'], ['Resolution', '3 m']],
@@ -124,7 +156,7 @@ Object.assign(APPS, {
     ]
   }
 });
-const SUITES = { works: ['plm', 'mes', 'pro', 'inv', 'bk'], space: ['mcc', 'eo'] };
+const SUITES = { works: ['inv', 'pro', 'plm', 'mes', 'qua', 'pm', 'fin'], space: ['mcc', 'eo'] };
 let suite = 'works';
 
 const app = $('app'), rail = $('rail'), tbody = $('tbody'), thead = $('thead'), qv = $('qv'), drawer = $('drawer'), ov = $('ov'), toastEl = $('toast');
@@ -222,31 +254,41 @@ function toast(text, ok) {
 
 /* ---------- Product detail + secondary navigation ---------- */
 const PD = {
-  plm: { tag: 'Design and engineering change, under control.',
-    overview: 'PLM holds every part, bill of materials and revision in one place. Engineers release changes through a controlled workflow, and everyone downstream sees the same current revision.',
-    points: ['Items and bills of materials with full revision history', 'Engineering change requests and orders', 'Drawings and documents linked to each part', 'Compliance AI (planned): flags missing specifications and certificates, and explains the impact of a change'],
-    uses: [['Release a change safely', 'See which assemblies and open work orders a revision touches before you release it.'], ['Keep design records audit-ready', 'Drawings, specifications and approvals stay with the part they belong to.'], ['Share one bill of materials', 'Production, purchasing and stores work from the same current revision.']],
-    faqs: [['Can I start with PLM alone?', 'Yes. Each product is sold alone or together, and you can add the others later without migrating.'], ['How does PLM connect to the shop floor?', 'It is designed so released revisions reach MES work orders and Procurement, so teams build and buy from the current revision.'], ['What will Compliance AI do in PLM?', 'It is planned to flag missing specifications and certificates and to explain change impact. A person gives a signed approval before any change is final.']] },
-  mes: { tag: 'Work orders and the shop floor, recorded as they happen.',
-    overview: 'MES turns released designs into work orders, tracks each step on the line and records inspections, so every batch has a complete history.',
-    points: ['Work orders and routings', 'Inspection records and quality holds', 'Batch traceability from material to finished item', 'Compliance AI (planned): spots missed inspection steps and suggests a quality hold'],
-    uses: [['Hold a batch before it moves on', 'Place a quality hold until someone decides to release, rework or reject.'], ['Trace a batch end to end', 'See which material, machine and operator went into a finished batch.'], ['Plan the day’s work orders', 'See what is released, in progress, on hold and due.']],
-    faqs: [['Does MES need the other products?', 'No. You can run MES alone and add PLM, Procurement, Inventory or Bookkeeping later.'], ['What is a quality hold?', 'A stop placed on a batch or work order until a person decides what happens next.'], ['What will Compliance AI do in MES?', 'It is planned to check inspection records as work happens and recommend release or hold. People make the decision.']] },
-  pro: { tag: 'Buy from suppliers you can trust.',
-    overview: 'Procurement covers requests, quotes, purchase orders, receipts and supplier performance, so buying is controlled and every order can be matched to its receipt and invoice.',
-    points: ['Requests, quotes and purchase orders', 'Goods receipts and three-way matching', 'Supplier records with tax details and performance', 'Compliance AI (planned): checks supplier details and flags unusual terms'],
-    uses: [['Compare quotes', 'Put supplier quotes side by side before you order.'], ['Match order, receipt and invoice', 'Catch differences before a bill is approved.'], ['Check suppliers before you order', 'Keep tax and registration details on the supplier record.']],
-    faqs: [['Can I connect Procurement to my books?', 'Yes. Approved orders and bills connect to Bookkeeping when you use both. Connectors for Tally, Zoho Books, QuickBooks and Xero are planned.'], ['Is it built for Indian tax rules?', 'Scutoid is India first, with tax details held on supplier and item records. Other countries follow as country packs.'], ['What will Compliance AI do in Procurement?', 'It is planned to check supplier tax details and match orders, receipts and invoices, then explain every flag.']] },
-  inv: { tag: 'Stock you can account for.',
-    overview: 'Inventory tracks batches, locations, stock movements, job work and despatch, so you always know what you have, where it is and who holds it.',
-    points: ['Batches (lots) and locations', 'Job work out and back, against a challan', 'Despatch and delivery documents', 'Compliance AI (planned): warns about shelf life and checks despatch documents, and builds custom agentic workflows from your instructions'],
-    uses: [['Track job work', 'Follow goods out to a job worker and chase what is due back.'], ['Use stock in the right order', 'Move the earliest-expiring batch to the front of the pick list.'], ['Check despatch before goods leave', 'Confirm documents and quantities match the order.']],
-    faqs: [['What is job work?', 'Sending goods to a job worker to process and receiving them back. Scutoid tracks goods out and back against a challan.'], ['Can I automate stock tasks?', 'Compliance AI is planned to build custom agentic workflows from your plain-language instructions, with signed approvals where records change. See Workflows on this page.'], ['Can I use Inventory without Procurement?', 'Yes. Each product works alone, and they connect when you use them together.']] },
-  bk: { tag: 'Books that close on time.',
-    overview: 'Bookkeeping keeps ledgers, bills, invoices, GST and TDS, bank reconciliation and period close connected to the work behind them in design, buying and stores.',
-    points: ['Ledgers, bills and invoices', 'GST and TDS, India first', 'Bank reconciliation and period close', 'Compliance AI (planned): reconciles returns against the books and explains what blocks the close'],
-    uses: [['Reconcile tax returns', 'Compare returns with your books and see the differences.'], ['Close the period with a checklist', 'See what is blocking the close and who owns it.'], ['Keep one set of records', 'Purchases and stock feed the books without re-entry.']],
-    faqs: [['Can I keep the accounting software I use now?', 'Connectors for Tally, Zoho Books, QuickBooks and Xero are planned so data can flow to the books you already keep.'], ['Which tax rules does it cover?', 'GST and TDS for India first, with country packs for other markets later. Compliance AI supports your team and is not legal or tax advice.'], ['What will Compliance AI do in Bookkeeping?', 'It is planned to reconcile returns, highlight deduction issues early and prepare the close checklist. A person approves.']] },
+  inv: { tag: 'A stock figure you can trust.',
+    overview: 'Inventory gives you multi-location stock with bins, lots and serials, material planning, valuation and the statutory documents for every movement, all from one record. It is part of the first offer, so quotes read its stock and costs and Procurement buys from its shortages.',
+    points: ['Lots, serials and bins by barcode, including reels, cut tape and moisture-sensitive parts', 'Material planning, kitting, build orders and despatch', 'Valuation by first-in-first-out or weighted average, with landed cost', 'Job work out and back, with the GST job-work return', 'The Planning Agent (planned): turns each planning run into a drafted plan for a planner to approve'],
+    uses: [['Know what you have', 'See stock by location, lot and serial, and what is held for a customer or a job worker.'], ['Plan material on live stock', 'See shortages, build orders and what is clear to build, with the reasons explained.'], ['Track job work both ways', 'Follow goods out to a job worker, reconcile what comes back and keep customer-owned stock separate.']],
+    faqs: [['Can I start with Inventory alone?', 'Yes. Every product is complete on its own and shares one data model, so you can add the others later without moving data.'], ['What does the Planning Agent do?', 'It is planned to group planning exceptions, explain them and draft a plan. A planner approves it. The agent suggests, drafts and checks; people decide.'], ['Does it cover job work?', 'Yes. Goods out and back are tracked against a challan, and the job-work return is generated from the record.']] },
+  pro: { tag: 'Buy the right parts, at the right price, on time.',
+    overview: 'Procurement runs requests, supplier quotes, purchase orders, receipts and supplier records on the same record as your quotes and stock. Bills are matched to the order and receipt before payment.',
+    points: ['Requisition to quote request to purchase order, with acknowledgements', 'Supplier onboarding with GSTIN, PAN, Udyam and bank details', 'Three-way match of order, receipt and bill, and the legal payment limit for small suppliers', 'Import papers and duty held in landed cost', 'The Purchase Agent (planned): finds shortages, compares quotes and drafts purchase orders for approval'],
+    uses: [['Buy from the shortage list', 'Raise purchase orders for what the build needs, from the parts list and the plan.'], ['Compare quotes side by side', 'Put supplier quotes next to each other before you order.'], ['Match before you pay', 'Catch differences between order, receipt and bill before a bill is approved.']],
+    faqs: [['Is Procurement part of the first offer?', 'Yes. Quoting, Inventory and Procurement together are the first offer, quote-to-build, because a wrong price or a missing part costs cash first.'], ['What does the Purchase Agent do?', 'It is planned to find shortages, compare quotes and draft purchase orders. A person approves every order.'], ['Can I connect it to my accounting software?', 'Yes. The accounting connector is included in every plan. Connectors for Tally, Zoho Books, QuickBooks and Xero are planned.']] },
+  plm: { tag: 'Design and change.',
+    overview: 'PLM gives you one controlled product record, released right first time. Engineering changes show their effect on live stock, open orders and work in progress before anyone approves them.',
+    points: ['Controlled items and multi-level parts lists with revisions and where-used', 'Engineering change, with impact shown before approval', 'Approved manufacturer and source lists, and compliance records', 'A vault for design files, with CAD connectors', 'First-article packs and new product introduction checklists'],
+    uses: [['Release a change safely', 'See the stock, orders and work in progress a revision touches before you approve it, and set the date or serial number it starts from.'], ['Keep one released revision', 'Purchasing, stores and the shop floor all work from the same current revision.'], ['Pack up a first article', 'Collect the records a customer expects for a new product.']],
+    faqs: [['Do I need PLM to have a parts list?', 'No. A basic parts list and routing are in the shared foundation for every customer. PLM adds change control, approval and release to those same records, with no data move.'], ['Does PLM have an agent?', 'No agent is tied to PLM. The other Scutoid Agents use PLM records, and PLM has its own Assisted and Delegated AI actions.'], ['Does Scutoid replace CAD?', 'No. Design authoring is not part of Scutoid. PLM connects to your CAD tools and holds the files.']] },
+  mes: { tag: 'Run and trace production.',
+    overview: 'MES puts the shop floor on the one record. Orders become work orders on routings, scheduled against capacity, run with work instructions at the station and traced down to the parts that went in.',
+    points: ['Work orders, dispatch lists and finite scheduling', 'Work instructions at the station, with checks against limits', 'Material issue, backflush, work in progress and genealogy', 'Kitting by reel, feeder verification, panel serials and the repair loop', 'The Shop-floor Voice Assistant (planned): reads instructions aloud and turns a spoken report into one transaction the operator confirms'],
+    uses: [['Trace a defect in under an hour', 'Go back from a finished board to the lot, reel, operation and operator, and forward to who received it.'], ['Run the day’s work orders', 'See what is released, in progress, on hold and due, against real capacity.'], ['Know the actual cost', 'See work in progress value and actual cost per work order.']],
+    faqs: [['Does MES need the other products?', 'No. Every product works alone and they connect when used together.'], ['Does Scutoid program or control my machines?', 'No. Machine programming and control are not part of Scutoid. It connects to machines to read counts, states and faults.'], ['Can operators work by voice?', 'The Shop-floor Voice Assistant is planned. Operators confirm each transaction. Voice is English only at launch.']] },
+  qua: { tag: 'Contain it, fix it, keep it fixed.',
+    overview: 'Quality adds closed-loop quality for regulated and export work. Basic inspections, non-conformances and controlled documents are already in the shared foundation; Quality adds the actions that make sure a problem stays fixed, across your firm and your suppliers.',
+    points: ['Corrective and preventive action, including 8D, with effectiveness checks', 'Supplier quality: requests, scorecards, certificates and suspect-counterfeit handling', 'Audits, with checklists, findings and reports', 'Statistical process control with charts, rules and reaction plans', 'The Quality Agent (planned): drafts non-conformances and 8Ds, and reads certificates and complaints, for people to complete and approve'],
+    uses: [['Close the loop on a defect', 'One record links the defect, its lot, its process and its supplier through to closure.'], ['Hold suppliers to account', 'Send corrective action requests, track replies and see a quality score.'], ['Be ready for an audit', 'Keep programmes, findings and evidence in one place.']],
+    faqs: [['Do I need Quality for inspections?', 'No. Basic quality is in the shared foundation for every customer. Quality adds corrective action, supplier quality, audits and process control.'], ['What does the Quality Agent do?', 'It is planned to draft records and summaries from certificates, complaints and traces. People complete and approve them.'], ['Is it for regulated work?', 'It is designed for regulated and export work. A regulated mode is planned, and selling it to some regulated segments waits until it is opened.']] },
+  pm: { tag: 'Projects on plan and on budget.',
+    overview: 'Project Management runs the work that does not fit one order, such as a new product, a machine built to order or a new line, on the same record as your quotes, purchases, stock and builds. Cost arrives as it happens, not at month end.',
+    points: ['Tasks, dependencies, milestones and stage gates', 'Templates for new product introduction, plant set-up and engineer-to-order work', 'Budget against commitments against actual cost, from orders, time and work orders', 'Weekly timesheets and billing milestones', 'A simple portfolio list across projects'],
+    uses: [['See cost the moment it commits', 'A purchase order, a receipt or approved time shows against the project budget straight away.'], ['Run a new product launch', 'Use a template with stage gates, then link tasks to real work.'], ['Bill on milestones', 'Raise invoices when a milestone is reached.']],
+    faqs: [['Is it a general task tool?', 'It is built for manufacturers, so projects link to the orders, purchases, stock and builds behind them.'], ['Do I need it for every order?', 'No. Use it where an order is a project. Ordinary orders run without it.'], ['Does it post to the books?', 'Billing and cost go to Scutoid Finance, or to your own accounting software through the connector.']] },
+  fin: { tag: 'Accounting and finance for makers.',
+    overview: 'Finance is the finance department for a manufacturer: accounting, cash and close, on the same record as your orders, receipts, bills and stock. Your finance team chooses the ledger of record: Scutoid’s own ledger, or your existing accounting system.',
+    points: ['Payables, receivables, collections and the cash position', 'India: GST, e-invoicing, TDS and the legal payment limit for small suppliers', 'Fixed assets, cost accounting, budgets and period close', 'Sister companies under one owner, with a combined view', 'One licence and one price, whichever ledger you choose'],
+    uses: [['Close the period with a checklist', 'See what blocks the close and who owns it. Stock, work in progress and bills arrive from source.'], ['Reconcile tax and bank', 'Compare returns and bank lines with your books and see the differences.'], ['Run a group of companies', 'Pair the sales between your companies and see one combined view.']],
+    faqs: [['Can I keep my accounting software?', 'Yes. In every market you can keep your own system and send it the data through the connector, which is included. Nothing is e-invoiced twice.'], ['When can the Scutoid ledger be used?', 'A ledger goes live in a market only after that market’s accountants have signed off its Finance pack, and a company moves at the start of a period with its accountant’s approval.'], ['Is the AI tax advice?', 'No. Nothing is filed or posted without a person’s approval, and it is not legal or tax advice.']] },
   mcc: { tag: 'Plan, command and monitor missions.',
     overview: 'Mission Command Center is where operators plan contact windows, send commands and monitor spacecraft. It is in design, and details may change.',
     points: ['Pass and contact-window planning', 'Command sequences with review', 'Operator log for every action', 'Compliance AI (planned): checks sequences against mission rules and flags passes that need a second operator'],
@@ -306,18 +348,18 @@ window.addEventListener('scroll', () => { if (spyTick) return; spyTick = true; r
 
 
 /* ---------- Suite hero, flow and cards ---------- */
-const ACC = { plm: '#2DA2B5', mes: '#2DA2B5', pro: '#2DA2B5', inv: '#2DA2B5', bk: '#E84271', mcc: '#9C2DB7', eo: '#9C2DB7' };
+const ACC = { plm: '#2DA2B5', mes: '#2DA2B5', pro: '#2DA2B5', inv: '#2DA2B5', qua: '#2DA2B5', pm: '#2DA2B5', fin: '#E84271', mcc: '#9C2DB7', eo: '#9C2DB7' };
 const ART = {
   mcc: '<svg viewBox="0 0 400 200"><ellipse cx="200" cy="100" rx="170" ry="62" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-dasharray="4 6"/><ellipse cx="200" cy="100" rx="110" ry="40" fill="none" stroke="currentColor" stroke-opacity=".6" transform="rotate(-18 200 100)"/><circle cx="200" cy="100" r="30" fill="currentColor" fill-opacity=".18" stroke="currentColor"/><circle cx="296" cy="64" r="6" fill="currentColor"/><circle cx="96" cy="142" r="4" fill="currentColor" fill-opacity=".7"/></svg>',
   eo: '<svg viewBox="0 0 400 200"><g fill="none" stroke="currentColor" stroke-opacity=".3"><path d="M0 50h400M0 100h400M0 150h400M80 0v200M160 0v200M240 0v200M320 0v200"/></g><path d="M60 190 150 10h90l-90 180z" fill="currentColor" fill-opacity=".16" stroke="currentColor"/><path d="M250 190 330 40h50l-80 150z" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-opacity=".6"/></svg>'
 };
 const SUITE_META = {
   works: {
-    title: 'Scutoid Works', tag: 'Design · Make · Buy · Stock · Account',
-    lead: 'A cloud manufacturing suite that connects design, shop floor, purchasing, stock and accounts on one set of records, with local compliance built in. Start with one product and add the others later.',
-    flowTitle: 'One set of records, from design to books.', flowSub: 'Each product works alone. Used together, they are designed to share the same records, so nothing is typed twice.',
-    flow: [['plm', 'Design', 'Parts, bills of materials and revisions'], ['mes', 'Make', 'Work orders and inspections'], ['pro', 'Buy', 'Orders, receipts and suppliers'], ['inv', 'Stock', 'Batches, job work and despatch'], ['bk', 'Account', 'Bills, GST, TDS and period close']],
-    cardsTitle: 'Five products. Sold alone or together.', cardsSub: 'Add a product at any time without migrating. Compliance AI is being designed for each one.'
+    title: 'Scutoid Works', tag: 'Seven products · Six agents · One record',
+    lead: 'The connected operations platform for discrete manufacturers. It runs the whole business on one record, from first quote to final payment, with local compliance built in. Each team decides how much of the work AI does, and people make every decision.',
+    flowTitle: 'One record, from first quote to final payment.', flowSub: 'Quote, design, plan, buy, make, deliver and account, with projects, quality and traceability running through every step. Each product works alone; used together they share one data model, so nothing is typed twice.',
+    flow: [['plm', 'Design', 'Parts lists, revisions and change'], ['inv', 'Plan and stock', 'Lots, serials and material planning'], ['pro', 'Buy', 'Quotes, orders and receipts'], ['mes', 'Make', 'Work orders and traceability'], ['qua', 'Assure', 'Corrective action and audits'], ['pm', 'Deliver', 'Projects on plan and budget'], ['fin', 'Account', 'Cash, tax and close']],
+    cardsTitle: 'Seven products. Sold alone or together.', cardsSub: 'Add a product at any time without moving data. Quoting, basic quality, documents and the audit trail are in the shared foundation for every customer.'
   },
   space: {
     title: 'Scutoid Space', tag: 'Mission operations · Earth observation',
@@ -342,7 +384,7 @@ function renderSuite() {
       <img class="pcard-logo" src="${a.logo}" alt="" width="56" height="56">
       <div class="pcard-body"><h3>${a.label}</h3><p class="ptag">${d.tag}</p>
         <ul class="ticks tight">${d.points.slice(0, 3).map(x => `<li>${x}</li>`).join('')}</ul>
-        <div class="pcard-foot"><span class="badge ${space ? 'neutral' : 'purple'} dot">${space ? 'In design' : 'Compliance AI planned'}</span><button type="button" class="inline" data-p="${k}">Explore overview</button></div></div></article>`;
+        <div class="pcard-foot"><span class="badge ${space ? 'neutral' : 'purple'} dot">${space ? 'In design' : 'In development'}</span><button type="button" class="inline" data-p="${k}">Explore overview</button></div></div></article>`;
   }).join('');
   document.querySelectorAll('#pChips [data-p], #pCards [data-p]').forEach(b => b.addEventListener('click', () => goTo('p-' + b.dataset.p)));
 }
