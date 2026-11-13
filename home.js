@@ -209,14 +209,19 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
 })();
 
 
-/* ---------- Hero: glass event cards play the PO check in sequence (illustrative) ---------- */
+/* ---------- Hero: one order through all seven stages, as a rolling feed (illustrative) ---------- */
 (function () {
   const box = document.getElementById('heroCards');
   if (!box) return;
   const cards = [...box.querySelectorAll('.hc')];
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const show = n => cards.forEach((c, i) => { c.classList.toggle('on', i === n); c.classList.toggle('past', i < n); });
-  if (reduce) { show(cards.length - 1); return; }
+  const rail = [...box.querySelectorAll('.hc-rail span')];
+  const OP = [1, 0.7, 0.42, 0.18];                       // newest card is brightest; older ones fade as they roll up
+  const show = n => {
+    cards.forEach((c, i) => { const k = n - i; c.style.setProperty('--k', k >= 0 && k < 4 ? k : (k < 0 ? -1 : 4)); c.style.setProperty('--o', k >= 0 && k < 4 ? OP[k] : 0); });
+    rail.forEach((r, i) => { r.classList.toggle('on', i === n); r.classList.toggle('done', i < n); });
+  };
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { show(cards.length - 1); return; }
+  show(-1);
   let n = -1;
-  setInterval(() => { n = n >= cards.length + 1 ? -1 : n + 1; if (n < 0) { cards.forEach(c => c.classList.remove('on', 'past')); return; } show(Math.min(n, cards.length - 1)); }, 1700);
+  setInterval(() => { n = n >= cards.length + 1 ? -1 : n + 1; show(Math.min(n, cards.length - 1)); if (n < 0) show(-1); }, 2000);
 })();

@@ -1131,3 +1131,20 @@ body.demo-max{overflow:hidden}
 .login-body.home .login-card h1{background:linear-gradient(90deg,var(--fg),var(--brand-dark));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 @media(prefers-reduced-motion:reduce){.inner .section .card.pad{transition:none}}
 .login-body.home .login-card h1{padding-bottom:.14em;line-height:1.2}
+
+/* ---------- Hero story: seven stages in the same space ---------- */
+.hero-cards{display:block;max-width:420px;margin-left:auto;width:100%}
+.hc-rail{display:flex;gap:4px;margin-bottom:12px}
+.hc-rail span{flex:1;text-align:center;font-size:11px;font-weight:700;padding:5px 0;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.55);transition:background .4s,color .4s}
+.hc-rail span.done{background:rgba(129,199,211,.22);color:#BFE6EE}
+.hc-rail span.on{background:#fff;color:var(--navy)}
+.hc-feed{position:relative;height:328px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%);mask-image:linear-gradient(180deg,transparent 0,#000 16%)}
+.hero-cards .hc{position:absolute;left:0;right:0;bottom:0;height:76px;padding:0 16px;gap:14px;opacity:var(--o,0);transform:translateY(calc(var(--k,-1) * -84px));transition:transform .8s cubic-bezier(.22,.7,.2,1),opacity .8s ease}
+.hc em{display:block;font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#81C7D3;margin-bottom:1px}
+.hc b{font-size:15px;line-height:1.25}
+.hc small{display:block;font-size:12.5px;line-height:1.3}
+.hc-ic.blue{background:rgba(84,172,221,.28);color:#A8D6F2}
+.hc-ic.teal{background:rgba(45,162,181,.3);color:#8FD8E6}
+.hc-cap{margin-top:10px}
+@media(max-width:900px){.hero-cards{max-width:none}}
+@media(prefers-reduced-motion:reduce){.hero-cards .hc{transition:none}}
