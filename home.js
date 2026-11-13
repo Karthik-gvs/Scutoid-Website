@@ -110,8 +110,8 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
     (warn ? '<path class="tick" d="M' + x + ' ' + (y - 6) + 'v7M' + x + ' ' + (y + 6) + 'h.1"/>' : '<path class="tick" d="M' + (x - 6) + ' ' + y + 'l4.5 5 8-9.5"/>'));
   const art = (inner, cap) => '<svg viewBox="0 0 800 400" aria-hidden="true" focusable="false">' + backdrop() + inner + '</svg><p class="art-cap">' + cap + '</p>';
 
-  const JIDS = ['J01 · Enquiry to production', 'J04, J05 · Design to change', 'J06, J07 · Plan to produce', 'J08 · Procure to pay', 'J06, J14 · Production and quality', 'J07 · Despatch', 'J09 · Invoice to payment received'];
-  const TIMES = ['8:40', '9:15', '10:30', '11:10', '2:00', '4:45', '5:30'];
+  const JIDS = ['J01 · Enquiry to production', 'J04, J05 · Design to change', 'J06, J07 · Plan to produce', 'J08 · Procure to pay', 'J06, J14 · Production and quality', 'J07 · Despatch', 'J09 · Invoice to payment received', 'J08, J10 · Pay the supplier, close the books'];
+  const TIMES = ['8:40', '9:15', '10:30', '11:10', '2:00', '4:45', '5:30', '6:20'];
   const CAPS = [
     "A parts list lands: 240 controller boards. Costed once at today's prices, the quote is ready for you to approve.",
     "The order is won, then a connector moves to Rev C. Before anyone signs, the effect on stock and open orders is on screen.",
@@ -119,7 +119,8 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
     "The J7 shortage becomes a purchase request. Three suppliers answer, and the best order is drafted for your approval.",
     "Line 2 hums. An operator says 'reel 88 loaded', and every board remembers which reel it came from.",
     "Boxes stacked, papers ready. The e-invoice and e-way bill are prepared before the truck is loaded.",
-    "The invoice goes out against the quote, with GST and e-invoice. The payment arrives, matches itself, and the true margin is known."
+    "The invoice goes out against the quote, with GST and e-invoice. The payment arrives and matches itself.",
+    "Mehta's bill matches the order and the receipt. A person approves the payment, and both entries land in the books, balanced."
   ];
   const clock = label => R(0.1, '<rect class="bubble" x="20" y="14" width="96" height="32" rx="16"/><circle class="g2" cx="40" cy="30" r="5"/>' + T(54, 36, label, 16));
   const pillRow = (x, y, w, at, label, warn) => R(at, '<rect class="pill" x="' + x + '" y="' + y + '" width="' + w + '" height="44" rx="22"/><circle class="' + (warn ? 'warn-c' : 'g2') + '" cx="' + (x + 24) + '" cy="' + (y + 22) + '" r="9"/>' + T(x + 44, y + 28, label, 15));
@@ -190,7 +191,18 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
     gem(690, 90, 1.05, 0.4) +
     R(5.4, '<rect class="bubble" x="612" y="150" width="156" height="34" rx="17"/>' + T(690, 172, 'Invoice sent', 15, '', 'middle')) +
     R(6.6, '<rect class="ok-c" x="602" y="194" width="176" height="32" rx="16"/>' + T(690, 215, 'Payment received', 14, 't-w', 'middle') + T(690, 246, '₹21,71,200.00', 16, '', 'middle')) +
-    R(8, '<rect class="ok-c" x="596" y="260" width="190" height="30" rx="15"/>' + T(691, 280, 'Matched · margin known', 12.5, 't-w', 'middle'));
+    R(7.6, '<rect class="ok-c" x="596" y="260" width="190" height="30" rx="15"/>' + T(691, 280, 'Matched to the invoice', 12.5, 't-w', 'middle'));
+
+  /* 8. 6:20  Settle: pay Mehta against PO-7710, and the books balance on both sides */
+  const s8 = clock(TIMES[7]) + person(110, 0.1) + R(0.3, '<path class="arm" d="M128 262 C 160 262, 196 250, 226 232"/>') +
+    R(0.6, '<rect class="decide" x="236" y="30" width="330" height="246" rx="18"/>' + T(256, 66, 'Pay Mehta Castings?', 20) + T(256, 92, '₹4,81,440.00 against PO-7710', 17, 't-m')) +
+    li(0, 1.4, 'Order PO-7710 matched') + li(1, 2, 'Receipt GRN-2291') + li(2, 2.6, 'Tax at source reviewed') +
+    R(3.6, '<rect class="btn-g" x="346" y="226" width="92" height="30" rx="8"/>' + T(392, 247, 'Not now', 15, '', 'middle') + '<rect class="btn-p" x="448" y="226" width="102" height="30" rx="8"/>' + T(499, 247, 'Approve', 15, 't-w', 'middle')) +
+    R(4.4, '<rect class="bubble" x="128" y="14" width="180" height="32" rx="16"/>' + T(218, 35, 'Payment recorded', 15, '', 'middle')) +
+    R(5.2, '<rect class="paper" x="590" y="40" width="190" height="236" rx="12"/>' + T(608, 70, 'Books', 17)) +
+    R(5.8, T(608, 108, 'Sales · INV-3081', 14, 't-m') + T(608, 132, '₹21,71,200.00 in', 16)) +
+    R(6.5, T(608, 170, 'Purchase · PO-7710', 14, 't-m') + T(608, 194, '₹4,81,440.00 out', 16)) +
+    R(7.4, '<rect class="ok-c" x="608" y="222" width="154" height="32" rx="16"/>' + T(685, 243, 'Both sides balanced', 12.5, 't-w', 'middle'));
 
   const SCENES = [
     { d: 6.5, title: 'Quote', cap: CAPS[0], html: art(s1, CAPS[0]) },
@@ -199,7 +211,8 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
     { d: 7, title: 'Buy', cap: CAPS[3], html: art(s4, CAPS[3]) },
     { d: 7, title: 'Make', cap: CAPS[4], html: art(s5, CAPS[4]) },
     { d: 6, title: 'Deliver', cap: CAPS[5], html: art(s6, CAPS[5]) },
-    { d: 9.5, title: 'Account', cap: CAPS[6], html: art(s7, CAPS[6]) }
+    { d: 8.5, title: 'Invoice', cap: CAPS[6], html: art(s7, CAPS[6]) },
+    { d: 9, title: 'Settle', cap: CAPS[7], html: art(s8, CAPS[7]) }
   ];
   const TOTAL = SCENES.reduce((s, x) => s + x.d, 0);
   const starts = []; SCENES.reduce((s, x) => (starts.push(s), s + x.d), 0);
