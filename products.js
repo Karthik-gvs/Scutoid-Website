@@ -1,4 +1,4 @@
-/* Products page: application demo + suite switch (Scutoid Space turns the page dark) + secondary navigation */
+/* Products page: application demo + suite switch (OANI Space turns the page dark) + secondary navigation */
 const $ = id => document.getElementById(id);
 const root = document.documentElement;
 /* ---------- Application glimpse (illustrative data) ---------- */
@@ -120,7 +120,7 @@ const APPS = {
   }
 };
 
-// Scutoid Space: no accent is assigned in the style guide yet, so it uses the platform default (purple) — open decision.
+// OANI Space: no accent is assigned in the style guide yet, so it uses the platform default (purple) — open decision.
 const PURPLE = { brand: '#9C2DB7', dark: '#7A2491', light: '#C481D4', fg: '#FFFFFF' };
 Object.assign(APPS, {
   mcc: {
@@ -166,7 +166,7 @@ const icon = (n, cls = '') => `<svg class="i ${cls}"><use href="#i-${n}"/></svg>
 const badge = ([t, tone]) => `<span class="badge ${tone}${tone === 'outline' ? '' : ' dot'}">${t}</span>`;
 
 function buildRail() {
-  rail.innerHTML = `<img class="mark" src="assets/Scutoid_Mark_Vector.svg" alt="Scutoid">` +
+  rail.innerHTML = `<img class="mark" src="assets/Scutoid_Mark_Vector.svg" alt="OANI">` +
     SUITES[suite].map(k => { const a = APPS[k]; return `<button data-app="${k}" aria-label="${a.label}" title="${a.label}"><img src="${a.logo}" alt=""><span>${a.label}</span></button>`; }).join('');
   rail.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { render(b.dataset.app); demoStep(2); }));
 }
@@ -268,12 +268,12 @@ const PD = {
     overview: 'PLM gives you one controlled product record, released right first time. Engineering changes show their effect on live stock, open orders and work in progress before anyone approves them.',
     points: ['Controlled items and multi-level parts lists with revisions and where-used', 'Engineering change, with impact shown before approval', 'Approved manufacturer and source lists, and compliance records', 'A vault for design files, with CAD connectors', 'First-article packs and new product introduction checklists'],
     uses: [['Release a change safely', 'See the stock, orders and work in progress a revision touches before you approve it, and set the date or serial number it starts from.'], ['Keep one released revision', 'Purchasing, stores and the shop floor all work from the same current revision.'], ['Pack up a first article', 'Collect the records a customer expects for a new product.']],
-    faqs: [['Do I need PLM to have a parts list?', 'No. A basic parts list and routing are in the shared foundation for every customer. PLM adds change control, approval and release to those same records, with no data move.'], ['Does PLM have an agent?', 'No agent is tied to PLM. The other Scutoid Agents use PLM records, and PLM has its own Assisted and Delegated AI actions.'], ['Does Scutoid replace CAD?', 'No. Design authoring is not part of Scutoid. PLM connects to your CAD tools and holds the files.']] },
+    faqs: [['Do I need PLM to have a parts list?', 'No. A basic parts list and routing are in the shared foundation for every customer. PLM adds change control, approval and release to those same records, with no data move.'], ['Does PLM have an agent?', 'No agent is tied to PLM. The other OANI Agents use PLM records, and PLM has its own Assisted and Delegated AI actions.'], ['Does OANI replace CAD?', 'No. Design authoring is not part of OANI. PLM connects to your CAD tools and holds the files.']] },
   mes: { tag: 'Run and trace production.',
     overview: 'MES puts the shop floor on the one record. Orders become work orders on routings, scheduled against capacity, run with work instructions at the station and traced down to the parts that went in.',
     points: ['Work orders, dispatch lists and finite scheduling', 'Work instructions at the station, with checks against limits', 'Material issue, backflush, work in progress and genealogy', 'Kitting by reel, feeder verification, panel serials and the repair loop', 'The Shop-floor Voice Assistant (planned): reads instructions aloud and turns a spoken report into one transaction the operator confirms'],
     uses: [['Trace a defect in under an hour', 'Go back from a finished board to the lot, reel, operation and operator, and forward to who received it.'], ['Run the day’s work orders', 'See what is released, in progress, on hold and due, against real capacity.'], ['Know the actual cost', 'See work in progress value and actual cost per work order.']],
-    faqs: [['Does MES need the other products?', 'No. Every product works alone and they connect when used together.'], ['Does Scutoid program or control my machines?', 'No. Machine programming and control are not part of Scutoid. It connects to machines to read counts, states and faults.'], ['Can operators work by voice?', 'The Shop-floor Voice Assistant is planned. Operators confirm each transaction. Voice is English only at launch.']] },
+    faqs: [['Does MES need the other products?', 'No. Every product works alone and they connect when used together.'], ['Does OANI program or control my machines?', 'No. Machine programming and control are not part of OANI. It connects to machines to read counts, states and faults.'], ['Can operators work by voice?', 'The Shop-floor Voice Assistant is planned. Operators confirm each transaction. Voice is English only at launch.']] },
   qua: { tag: 'Contain it, fix it, keep it fixed.',
     overview: 'Quality adds closed-loop quality for regulated and export work. Basic inspections, non-conformances and controlled documents are already in the shared foundation; Quality adds the actions that make sure a problem stays fixed, across your firm and your suppliers.',
     points: ['Corrective and preventive action, including 8D, with effectiveness checks', 'Supplier quality: requests, scorecards, certificates and suspect-counterfeit handling', 'Audits, with checklists, findings and reports', 'Statistical process control with charts, rules and reaction plans', 'The Quality Agent (planned): drafts non-conformances and 8Ds, and reads certificates and complaints, for people to complete and approve'],
@@ -283,17 +283,17 @@ const PD = {
     overview: 'Project Management runs the work that does not fit one order, such as a new product, a machine built to order or a new line, on the same record as your quotes, purchases, stock and builds. Cost arrives as it happens, not at month end.',
     points: ['Tasks, dependencies, milestones and stage gates', 'Templates for new product introduction, plant set-up and engineer-to-order work', 'Budget against commitments against actual cost, from orders, time and work orders', 'Weekly timesheets and billing milestones', 'A simple portfolio list across projects'],
     uses: [['See cost the moment it commits', 'A purchase order, a receipt or approved time shows against the project budget straight away.'], ['Run a new product launch', 'Use a template with stage gates, then link tasks to real work.'], ['Bill on milestones', 'Raise invoices when a milestone is reached.']],
-    faqs: [['Is it a general task tool?', 'It is built for manufacturers, so projects link to the orders, purchases, stock and builds behind them.'], ['Do I need it for every order?', 'No. Use it where an order is a project. Ordinary orders run without it.'], ['Does it post to the books?', 'Billing and cost go to Scutoid Finance, or to your own accounting software through the connector.']] },
+    faqs: [['Is it a general task tool?', 'It is built for manufacturers, so projects link to the orders, purchases, stock and builds behind them.'], ['Do I need it for every order?', 'No. Use it where an order is a project. Ordinary orders run without it.'], ['Does it post to the books?', 'Billing and cost go to OANI Finance, or to your own accounting software through the connector.']] },
   fin: { tag: 'Accounting and finance for makers.',
-    overview: 'Finance is the finance department for a manufacturer: accounting, cash and close, on the same record as your orders, receipts, bills and stock. Your finance team chooses the ledger of record: Scutoid’s own ledger, or your existing accounting system.',
+    overview: 'Finance is the finance department for a manufacturer: accounting, cash and close, on the same record as your orders, receipts, bills and stock. Your finance team chooses the ledger of record: OANI’s own ledger, or your existing accounting system.',
     points: ['Payables, receivables, collections and the cash position', 'India: GST, e-invoicing, TDS and the legal payment limit for small suppliers', 'Fixed assets, cost accounting, budgets and period close', 'Sister companies under one owner, with a combined view', 'One licence and one price, whichever ledger you choose'],
     uses: [['Close the period with a checklist', 'See what blocks the close and who owns it. Stock, work in progress and bills arrive from source.'], ['Reconcile tax and bank', 'Compare returns and bank lines with your books and see the differences.'], ['Run a group of companies', 'Pair the sales between your companies and see one combined view.']],
-    faqs: [['Can I keep my accounting software?', 'Yes. In every market you can keep your own system and send it the data through the connector, which is included. Nothing is e-invoiced twice.'], ['When can the Scutoid ledger be used?', 'A ledger goes live in a market only after that market’s accountants have signed off its Finance pack, and a company moves at the start of a period with its accountant’s approval.'], ['Is the AI tax advice?', 'No. Nothing is filed or posted without a person’s approval, and it is not legal or tax advice.']] },
+    faqs: [['Can I keep my accounting software?', 'Yes. In every market you can keep your own system and send it the data through the connector, which is included. Nothing is e-invoiced twice.'], ['When can the OANI ledger be used?', 'A ledger goes live in a market only after that market’s accountants have signed off its Finance pack, and a company moves at the start of a period with its accountant’s approval.'], ['Is the AI tax advice?', 'No. Nothing is filed or posted without a person’s approval, and it is not legal or tax advice.']] },
   mcc: { tag: 'Plan, command and monitor missions.',
     overview: 'Mission Command Center is where operators plan contact windows, send commands and monitor spacecraft. It is in design, and details may change.',
     points: ['Pass and contact-window planning', 'Command sequences with review', 'Operator log for every action', 'Compliance AI (planned): checks sequences against mission rules and flags passes that need a second operator'],
     uses: [['Plan contact windows', 'See upcoming passes across ground stations.'], ['Review command sequences', 'Get a second operator’s review before commands go out.'], ['Keep an operator log', 'Record every action with who, what and when.']],
-    faqs: [['Is Mission Command Center available?', 'Not yet. It is in design, and what is shown here may change.'], ['What will Compliance AI do here?', 'It is planned to check command sequences against mission rules and explain what it finds. Operators stay in control.'], ['Why does Scutoid Space use dark mode?', 'Scutoid Space screens are designed in dark mode.']] },
+    faqs: [['Is Mission Command Center available?', 'Not yet. It is in design, and what is shown here may change.'], ['What will Compliance AI do here?', 'It is planned to check command sequences against mission rules and explain what it finds. Operators stay in control.'], ['Why does OANI Space use dark mode?', 'OANI Space screens are designed in dark mode.']] },
   eo: { tag: 'Turn imagery and data into decisions.',
     overview: 'Earth Observation turns satellite imagery and sensor data into results your teams can act on, with a record of where every data product came from. It is in design, and details may change.',
     points: ['Scene catalogue and processing status', 'Provenance for every data product', 'Quality checks such as cloud cover', 'Compliance AI (planned): flags scenes with missing licence or usage terms'],
@@ -306,7 +306,7 @@ document.querySelectorAll('#snTop button').forEach(b => b.addEventListener('clic
 
 function buildProducts() {
   const keys = SUITES[suite], space = suite === 'space';
-  document.getElementById('snSuite').textContent = space ? 'Scutoid Space' : 'Scutoid Works';
+  document.getElementById('snSuite').textContent = space ? 'OANI Space' : 'OANI Works';
   const sp = document.getElementById('snProducts');
   sp.innerHTML = keys.map(k => `<button type="button" data-p="${k}">${APPS[k].label}</button>`).join('');
   sp.querySelectorAll('button').forEach(b => b.addEventListener('click', () => goTo('p-' + b.dataset.p)));
@@ -355,18 +355,18 @@ const ART = {
 };
 const SUITE_META = {
   works: {
-    title: 'Scutoid Works', tag: 'Seven products · Six agents · One record',
+    title: 'OANI Works', tag: 'Seven products · Six agents · One record',
     lead: 'The connected operations platform for discrete manufacturers. It runs the whole business on one record, from first quote to final payment, with local compliance built in. Each team decides how much of the work AI does, and people make every decision.',
     flowTitle: 'One record, from first quote to final payment.', flowSub: 'Quote, design, plan, buy, make, deliver and account, with projects, quality and traceability running through every step. Each product works alone; used together they share one data model, so nothing is typed twice.',
     flow: [['plm', 'Design', 'Parts lists, revisions and change'], ['inv', 'Plan and stock', 'Lots, serials and material planning'], ['pro', 'Buy', 'Quotes, orders and receipts'], ['mes', 'Make', 'Work orders and traceability'], ['qua', 'Assure', 'Corrective action and audits'], ['pm', 'Deliver', 'Projects on plan and budget'], ['fin', 'Account', 'Cash, tax and close']],
-    cardsTitle: 'Seven products. Sold alone or together.', cardsSub: 'Add a product at any time without moving data. Quoting, basic quality, documents and the audit trail are in the shared foundation for every customer.'
+    cardsTitle: 'Seven products. Sold alone or together.', cardsSub: 'Add a product at any time without moving data. Quoting, basic quality, documents and the audit trail are in the shared foundation for every customer. Every product follows the OANI doctrine: AI that works inside the task, shows its reason, runs on the same record and leaves the decision to a person.'
   },
   space: {
-    title: 'Scutoid Space', tag: 'Mission operations · Earth observation',
+    title: 'OANI Space', tag: 'Mission operations · Earth observation',
     lead: 'Two products for space operations. Plan and command missions, then turn what your spacecraft capture into decisions, with Compliance AI checking the work and explaining what it finds.',
     flowTitle: 'From the first pass to the final product.', flowSub: 'Mission Command Center and Earth Observation are designed to work alone or together. Both are in design and may change.',
     flow: [['mcc', 'Plan', 'Contact windows and passes'], ['mcc', 'Command', 'Sequences with review'], ['eo', 'Observe', 'Scenes and sensors'], ['eo', 'Deliver', 'Data products with provenance']],
-    cardsTitle: 'Two products. In design.', cardsSub: 'Scutoid Space screens use dark mode. Product details may change.'
+    cardsTitle: 'Two products. In design.', cardsSub: 'OANI Space screens use dark mode. Product details may change. The same OANI doctrine applies: AI that works inside the task, shows its reason, runs on the same record and leaves the decision to an operator.'
   }
 };
 function renderSuite() {
@@ -416,13 +416,13 @@ function setMax(on) {
 $('demoMax').addEventListener('click', () => setMax(!document.querySelector('.frame.max')));
 $('demoReset').addEventListener('click', () => { closeDrawer(); render(current); demoStep(2); });
 
-/* Theme: light by default. Scutoid Space turns the whole page dark. */
+/* Theme: light by default. OANI Space turns the whole page dark. */
 function setAppMode(m) {
   app.classList.toggle('dark', m === 'dark');
   $('modeBtn').innerHTML = icon(m === 'dark' ? 'sun' : 'moon');
 }
 $('modeBtn').addEventListener('click', () => {
-  if (suite === 'space') return toast('Scutoid Space screens always use dark mode.');
+  if (suite === 'space') return toast('OANI Space screens always use dark mode.');
   setAppMode(app.classList.contains('dark') ? 'light' : 'dark');
 });
 $('newBtn').addEventListener('click', () => toast('New records open in a form drawer.'));

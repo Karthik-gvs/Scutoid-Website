@@ -275,3 +275,153 @@ document.querySelectorAll('#wfChips .chip-btn').forEach(b => b.addEventListener(
   let n = -1;
   setInterval(() => { n = n >= cards.length + 1 ? -1 : n + 1; show(Math.min(n, cards.length - 1)); if (n < 0) show(-1); }, 2000);
 })();
+
+/* ---------- OANI info slider: tabs, arrows, swipe and keys. Without scripting every slide is simply shown in a stack ---------- */
+(function () {
+  const root = document.getElementById('oSlider');
+  if (!root) return;
+  const tabBar = root.querySelector('.o-tabs');
+  const tabs = [...tabBar.querySelectorAll('[role=tab]')];
+  const slides = [...root.querySelectorAll('.o-slide')];
+  const view = root.querySelector('.o-view'), track = root.querySelector('.o-track'), ind = root.querySelector('.o-ind');
+  const prev = root.querySelector('.o-prev'), next = root.querySelector('.o-next');
+  const count = root.querySelector('.o-count'), bar = root.querySelector('.o-bar i');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur = 0;
+  root.classList.add('js');
+
+  function fit() {                       // the view takes the height of the slide in front, so short slides leave no gap
+    view.style.height = slides[cur].offsetHeight + 'px';
+    const t = tabs[cur];
+    ind.style.width = t.offsetWidth + 'px';
+    ind.style.transform = 'translateX(' + t.offsetLeft + 'px)';
+    ind.style.setProperty('--ot', t.style.getPropertyValue('--ot'));
+  }
+
+  function go(n, focus) {
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    track.style.transform = 'translateX(' + (-100 * cur) + '%)';
+    tabs.forEach((t, i) => { const on = i === cur; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    slides.forEach((s, i) => s.toggleAttribute('inert', i !== cur));   // hidden slides cannot be tabbed into
+    prev.disabled = cur === 0; next.disabled = cur === slides.length - 1;
+    count.textContent = (cur + 1) + ' / ' + slides.length;
+    bar.style.width = ((cur + 1) / slides.length * 100) + '%';
+    fit();
+    const sc = root.closest('.o-dbody');              // a new slide starts at its top
+    if (sc) sc.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    if (tabBar.scrollWidth > tabBar.clientWidth) {   // small screens: keep the chosen tab in view without scrolling the page
+      const t = tabs[cur];
+      tabBar.scrollTo({ left: t.offsetLeft - (tabBar.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    if (focus) tabs[cur].focus();
+  }
+
+  tabs.forEach((t, i) => t.addEventListener('click', () => go(i)));
+  tabBar.addEventListener('keydown', e => {
+    const k = e.key;
+    if (k === 'ArrowRight' || k === 'ArrowDown') { e.preventDefault(); go(cur + 1, true); }
+    else if (k === 'ArrowLeft' || k === 'ArrowUp') { e.preventDefault(); go(cur - 1, true); }
+    else if (k === 'Home') { e.preventDefault(); go(0, true); }
+    else if (k === 'End') { e.preventDefault(); go(slides.length - 1, true); }
+  });
+  prev.addEventListener('click', () => go(cur - 1));
+  next.addEventListener('click', () => go(cur + 1));
+  root.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(+b.dataset.go)));
+
+  // swipe on touch screens (vertical scrolling is left to the browser)
+  let sx = null, sy = null;
+  view.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') return; sx = e.clientX; sy = e.clientY; });
+  view.addEventListener('pointerup', e => {
+    if (sx === null) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(cur + (dx < 0 ? 1 : -1));
+  });
+  view.addEventListener('pointercancel', () => { sx = null; });
+
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(fit); slides.forEach(s => ro.observe(s)); ro.observe(tabBar); }
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  go(0);
+})();
+
+/* ---------- OANI drawer: click the tab, or pull it out with the mouse or a finger; Esc, the scrim, the cross or a drag back close it ---------- */
+(function () {
+  const dr = document.getElementById('oani'), handle = document.getElementById('oHandle'), scrim = document.getElementById('oScrim');
+  const head = document.getElementById('oHead'), closeBtn = document.getElementById('oClose');
+  if (!dr || !handle) return;
+  let isOpen = false, drag = null;
+  const W = () => dr.offsetWidth;
+
+  function open() {
+    if (isOpen) return; isOpen = true;
+    dr.style.transform = ''; dr.classList.remove('dragging'); dr.classList.add('open');
+    dr.removeAttribute('inert'); dr.setAttribute('aria-hidden', 'false');
+    scrim.hidden = false; requestAnimationFrame(() => scrim.classList.add('on'));
+    handle.setAttribute('aria-expanded', 'true'); handle.classList.add('hide');
+    window.dispatchEvent(new Event('resize'));
+    setTimeout(() => closeBtn.focus({ preventScroll: true }), 60);
+    if (location.hash !== '#oani') history.replaceState(null, '', '#oani');
+  }
+  function close(restore) {
+    const was = isOpen; isOpen = false;
+    dr.style.transform = ''; dr.classList.remove('dragging', 'open');
+    dr.setAttribute('inert', ''); dr.setAttribute('aria-hidden', 'true');
+    scrim.classList.remove('on'); setTimeout(() => { if (!isOpen) scrim.hidden = true; }, 360);
+    handle.setAttribute('aria-expanded', 'false'); handle.classList.remove('hide');
+    if (location.hash === '#oani') history.replaceState(null, '', location.pathname + location.search);
+    if (was && restore !== false) handle.focus({ preventScroll: true });
+  }
+
+  // pulling: the tab opens the drawer by dragging left, the header closes it by dragging right
+  function startDrag(e, from) {
+    if (e.button > 0) return;
+    drag = { from, x: e.clientX, moved: false, id: e.pointerId, el: e.currentTarget };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+  function moveDrag(e) {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    if (!drag.moved && Math.abs(dx) < 6) return;
+    if (!drag.moved) { drag.moved = true; dr.classList.add('dragging'); scrim.hidden = false; }
+    const base = drag.from === 'closed' ? W() : 0;
+    const pos = Math.max(0, Math.min(W(), base + dx));
+    dr.style.transform = 'translateX(' + pos + 'px)';
+    scrim.style.opacity = String(1 - pos / W()); scrim.classList.remove('on');
+    drag.pos = pos;
+  }
+  function endDrag() {
+    if (!drag) return;
+    const d = drag; drag = null;
+    scrim.style.opacity = '';
+    if (!d.moved) return;
+    d.el.dataset.dragged = '1'; setTimeout(() => delete d.el.dataset.dragged, 0);
+    dr.classList.remove('dragging');
+    if (d.pos < W() * 0.6) { isOpen = false; open(); } else { isOpen = true; close(); }
+  }
+  [[handle, 'closed'], [head, 'open']].forEach(([el, from]) => {
+    el.addEventListener('pointerdown', e => { if (e.target.closest('.o-close')) return; startDrag(e, from); });
+    el.addEventListener('pointermove', moveDrag);
+    el.addEventListener('pointerup', endDrag);
+    el.addEventListener('pointercancel', () => { if (drag) { drag.pos = from === 'closed' ? W() : 0; endDrag(); } });
+  });
+
+  handle.addEventListener('click', () => { if (handle.dataset.dragged) return; open(); });
+  closeBtn.addEventListener('click', () => close());
+  scrim.addEventListener('click', () => close());
+  document.addEventListener('keydown', e => {
+    if (!isOpen) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key === 'Tab') {                                   // keep focus inside the open drawer
+      const f = [...dr.querySelectorAll('a[href],button:not([disabled]),[tabindex="0"]')].filter(x => x.offsetParent !== null && !x.closest('[inert]'));
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // links such as index.html#oani (menu, footer, About) open the drawer
+  const fromHash = () => { if (location.hash === '#oani') open(); };
+  dr.addEventListener('pointermove', e => { const r = dr.getBoundingClientRect(); dr.style.setProperty('--mx', (e.clientX - r.left) + 'px'); dr.style.setProperty('--my', (e.clientY - r.top) + 'px'); }, { passive: true });
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();

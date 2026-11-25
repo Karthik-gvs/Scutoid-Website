@@ -1,4 +1,4 @@
-/* Scutoid design system tokens — from Application Guidelines (STYLE_GUIDE v2.0.2, color-tokens.md) */
+/* OANI design system tokens — from Application Guidelines (STYLE_GUIDE v2.0.2, color-tokens.md) */
 :root,.app{
   --brand:#2DA2B5; --brand-dark:#24818F; --brand-light:#81C7D3; --brand-fg:#0C0C0C;
   --bg:#F6F6F6; --card:#FFFFFF; --fg:#0C0C0C; --muted-fg:#4C4C4C; --subtle:#797978; --icon:#4C4C4C;
@@ -342,13 +342,10 @@ h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
-/* ---------- Page theme (light by default; Scutoid Space turns the page dark) ---------- */
+/* ---------- Page theme (light by default; OANI Space turns the page dark) ---------- */
 html{color-scheme:light}
 html[data-theme=dark]{color-scheme:dark}
 body,.nav,.section,.hero,.card,.strip,.mega{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
-.logo-dark{display:none}
-html[data-theme=dark] .logo-light{display:none}
-html[data-theme=dark] .logo-dark{display:block}
 html[data-theme=dark] .logo-tag{color:#A5A5A5;border-color:#4C4C4C}
 html[data-theme=dark] .hero{background:radial-gradient(900px 420px at 50% -10%,color-mix(in srgb,var(--brand) 22%,transparent),transparent 70%),var(--bg)}
 html[data-theme=dark] .section:not(.alt):not(.navy){background:var(--bg)}
@@ -362,7 +359,7 @@ html[data-theme=dark] .tile.orange{color:#F58A16}
 html[data-theme=dark] .t4:hover{border-color:#A5A5A5}
 html[data-theme=dark] .frame{box-shadow:0 24px 70px -20px color-mix(in srgb,var(--brand) 45%,transparent)}
 
-/* ---------- Products: mega menu, suite tabs, Scutoid Space ---------- */
+/* ---------- Products: mega menu, suite tabs, OANI Space ---------- */
 .mega-products{grid-template-columns:1fr 1.6fr 1fr}
 .mega-products .mega-group{display:flex;flex-direction:column;gap:2px;padding:0 8px;border-left:1px solid var(--border)}
 .mega-products .mega-group h6{font-size:13px;font-weight:600;color:var(--muted-fg);padding:0 14px 6px}
@@ -608,7 +605,7 @@ html[data-theme=dark] .frame{box-shadow:0 24px 70px -20px color-mix(in srgb,var(
 
 /* =====================================================================
    Liquid glass + floating secondary navigation (Anaplan-inspired layer)
-   Built on the Scutoid tokens; solid fallbacks where blur is unsupported.
+   Built on the OANI tokens; solid fallbacks where blur is unsupported.
    ===================================================================== */
 :root{
   --glass-bg:color-mix(in srgb,var(--card) 58%,transparent);
@@ -1326,3 +1323,189 @@ body.demo-max{overflow:hidden}
 }
 /* two-row floating bar on phones: leave room so the step label is not tucked behind it */
 @media(max-width:600px){.story{padding-top:96px}}
+/* keep a short highlighted phrase together on one line (home hero headline) */
+.nw{white-space:nowrap}
+
+/* ---------- OANI wordmark: the mark stays, the name is set in type ---------- */
+.logo-mark{height:28px;width:auto}
+.logo-word{font-size:22px;font-weight:700;letter-spacing:.16em;line-height:1;color:var(--navy);margin-right:2px}
+html[data-theme=dark] .logo-word,.footer .logo-word{color:#fff}
+
+/* ---------- OANI: what it is. An info slider; one idea in four words, shown for Manufacturing and for Space ---------- */
+
+/* tabs: a glass bar with a sliding indicator */
+.o-tabs{position:relative;display:flex;gap:4px;padding:6px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;border-radius:18px;
+  background:var(--gl-hi);border:1px solid var(--gl-edge);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--shadow-xs)}
+.o-tabs::-webkit-scrollbar{display:none}
+.o-tabs button{position:relative;z-index:1;flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 16px;border:0;background:none;border-radius:13px;cursor:pointer;font-size:14px;font-weight:700;color:var(--muted-fg);white-space:nowrap;transition:color .25s,background .25s}
+.o-tabs button i{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;font-style:normal;font-size:13px;font-weight:800;color:color-mix(in srgb,var(--ot) 62%,var(--fg));background:color-mix(in srgb,var(--ot) 16%,var(--card));transition:background .25s,color .25s}
+.o-tabs button i .i{width:15px;height:15px}
+.o-tabs button:not([aria-selected=true]):hover{background:color-mix(in srgb,var(--ot) 9%,transparent);color:var(--fg)}
+.o-tabs button[aria-selected=true]{color:var(--fg)}
+.o-tabs button[aria-selected=true] i{background:color-mix(in srgb,var(--ot) 66%,#000);color:#fff}
+.o-ind{position:absolute;z-index:0;left:0;top:6px;bottom:6px;width:0;border-radius:13px;background:var(--card);border:1px solid var(--border);border-bottom:3px solid var(--ot);box-shadow:0 8px 20px -12px var(--ot);
+  transition:transform .45s cubic-bezier(.22,.7,.2,1),width .45s cubic-bezier(.22,.7,.2,1),border-color .3s}
+
+/* the sliding view */
+.o-view{overflow:hidden;touch-action:pan-y}
+.o-track{display:flex;align-items:flex-start;will-change:transform;transition:transform .55s cubic-bezier(.22,.7,.2,1)}
+.oslider.js .o-view{transition:height .45s cubic-bezier(.22,.7,.2,1)}
+.o-slide{flex:0 0 100%;min-width:0;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:stretch;padding:3px}
+.oslider:not(.js) .o-track{display:grid;gap:22px}
+.oslider:not(.js) .o-tabs,.oslider:not(.js) .o-ctl{display:none}
+
+/* cards: pastel glass tiles in the slide's own colour */
+.o-main,.o-face{position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--border);border-radius:20px;background:var(--card);box-shadow:var(--shadow-xs)}
+.o-main{--tone:var(--ot);--gs:150px;--gx:30px;--gy:18px;padding:34px 34px 30px;border-top:5px solid var(--ot);
+  background:linear-gradient(165deg,color-mix(in srgb,var(--ot) 13%,var(--card)),color-mix(in srgb,var(--ot) 4%,var(--card)) 62%,var(--card))}
+.o-face{--tone:var(--brand);--gs:96px;--gx:22px;--gy:14px;padding:24px 24px 22px;border-top:4px solid var(--brand);
+  background:linear-gradient(165deg,color-mix(in srgb,var(--brand) 12%,var(--card)),var(--card) 70%)}
+.o-face.space{--tone:var(--purple);border-top-color:var(--purple);background:linear-gradient(165deg,color-mix(in srgb,var(--purple) 11%,var(--card)),var(--card) 70%)}
+.o-main::before,.o-face::before{content:"";position:absolute;z-index:-1;pointer-events:none;right:-34px;bottom:-46px;width:var(--gs,110px);height:var(--gs,110px);border-radius:30%;
+  background:linear-gradient(150deg,var(--gl-hi),color-mix(in srgb,var(--tone) 22%,transparent) 72%);border:1px solid var(--gl-edge);
+  box-shadow:calc(var(--gx,24px) * -1) calc(var(--gy,16px) * -1) 0 -8px color-mix(in srgb,var(--tone) 12%,transparent),calc(var(--gx,24px) * -2) calc(var(--gy,16px) * -2) 0 -16px color-mix(in srgb,var(--tone) 8%,transparent);
+  transform:rotate(-10deg);transition:transform .6s cubic-bezier(.22,.7,.2,1)}
+.o-main:hover::before,.o-face:hover::before{transform:rotate(-5deg) translate(-8px,-8px)}
+
+.o-kick{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-fg)}
+.o-kick b{display:grid;place-items:center;min-width:30px;height:30px;padding:0 8px;border-radius:10px;background:color-mix(in srgb,var(--ot) 66%,#000);color:#fff;font-size:14px;font-weight:800;letter-spacing:0}
+.o-kick b .i{width:16px;height:16px}
+.o-main h3{font-size:clamp(22px,2.5vw,30px);line-height:1.2;letter-spacing:-.015em;margin:16px 0 12px}
+.o-lead{font-size:16.5px;color:var(--muted-fg);max-width:62ch}
+.o-main .ticks{margin-top:18px}
+.o-main .ticks li::before{border-color:color-mix(in srgb,var(--ot) 70%,var(--fg))}
+
+.o-letters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:24px}
+.o-letters button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px 14px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ot) 32%,var(--border));background:color-mix(in srgb,var(--ot) 9%,var(--card));cursor:pointer;text-align:left;color:var(--fg);transition:transform .2s,box-shadow .2s,background .2s}
+.o-letters button b{font-size:34px;line-height:1;font-weight:800;color:color-mix(in srgb,var(--ot) 70%,var(--fg))}
+.o-letters button span{font-size:12.5px;font-weight:700;color:var(--muted-fg)}
+.o-letters button:hover{background:color-mix(in srgb,var(--ot) 16%,var(--card));transform:translateY(-2px);box-shadow:0 10px 22px -14px var(--ot)}
+
+.o-faces{display:grid;gap:16px;grid-template-rows:1fr 1fr}
+.o-face-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.o-face b{display:block;font-size:17px;line-height:1.28;margin:12px 0 6px}
+.o-face p{font-size:14.5px;color:var(--muted-fg)}
+.o-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.o-chips a{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--fg);background:color-mix(in srgb,var(--tone) 12%,var(--card));border:1px solid color-mix(in srgb,var(--tone) 32%,var(--border));transition:background .2s,transform .2s}
+.o-chips a:hover{background:color-mix(in srgb,var(--tone) 22%,var(--card));transform:translateY(-1px)}
+
+.o-tests{margin-top:20px;display:grid;gap:10px}
+.o-tests li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--card) 72%,transparent);border:1px solid var(--border)}
+.o-tests li b{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;font-size:14px;font-weight:800;color:#fff;background:color-mix(in srgb,var(--t) 66%,#000)}
+.o-tests li span{font-size:14.5px;font-weight:700;line-height:1.35}
+.o-tests li em{display:block;font-style:normal;font-weight:500;font-size:14px;color:var(--muted-fg)}
+
+/* controls */
+.o-ctl{display:flex;align-items:center;gap:14px;margin-top:18px}
+.o-nav{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--outline-border);background:var(--card);color:var(--fg);cursor:pointer;transition:background .2s,transform .2s,opacity .2s}
+.o-nav:hover:not(:disabled){background:color-mix(in srgb,var(--brand) 12%,var(--card));transform:translateY(-1px)}
+.o-nav:disabled{opacity:.4;cursor:default}
+.o-prev .i{transform:rotate(90deg)}
+.o-next .i{transform:rotate(-90deg)}
+.o-count{min-width:44px;text-align:center;font-size:13px;font-weight:700;color:var(--muted-fg);font-variant-numeric:tabular-nums}
+.o-bar{flex:1;height:4px;border-radius:4px;background:var(--border);overflow:hidden}
+.o-bar i{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,var(--brand),var(--purple));transition:width .45s cubic-bezier(.22,.7,.2,1)}
+
+@media(max-width:900px){
+  .o-slide{grid-template-columns:minmax(0,1fr)}
+  .o-faces{grid-template-rows:none}
+  .o-main{padding:26px 22px 24px}
+}
+@media(max-width:600px){
+  .o-letters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .o-tabs button{padding:0 12px}
+  .o-face{padding:20px 20px 18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .o-track,.o-ind,.oslider.js .o-view,.o-bar i,.o-main::before,.o-face::before,.o-tabs button,.o-tabs button i{transition:none}
+}
+
+/* closing slide: the doctrine card is dark, like the navy panels elsewhere on the page */
+#op-5 .o-main{background:linear-gradient(145deg,#2a2d52,#16182C);border-color:#16182C;color:#fff}
+#op-5 .o-main h3{color:#fff}
+#op-5 .o-lead,#op-5 .o-kick{color:rgba(255,255,255,.78)}
+#op-5 .o-kick b{background:var(--brand);color:#0C0C0C}
+#op-5 .o-main::before{--tone:#fff;background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 72%);border-color:rgba(255,255,255,.22)}
+#op-5 .o-tests li{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)}
+#op-5 .o-tests li span{color:#fff}
+#op-5 .o-tests li em{color:rgba(255,255,255,.72)}
+
+/* ---------- OANI drawer: pulled out from the right edge ---------- */
+.o-handle{position:fixed;right:0;top:50%;z-index:60;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 10px;border:0;border-radius:16px 0 0 16px;cursor:grab;touch-action:none;
+  color:#fff;background:linear-gradient(180deg,var(--brand-dark),var(--purple));box-shadow:-6px 10px 30px -10px rgb(22 24 44/.55),inset 1px 0 0 rgb(255 255 255/.25);
+  transition:transform .3s cubic-bezier(.22,.7,.2,1),opacity .25s}
+.o-handle span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.o-handle:hover{transform:translateY(-50%) translateX(-5px)}
+.o-handle:active{cursor:grabbing}
+.o-handle.hide{opacity:0;pointer-events:none}
+.o-scrim{position:fixed;inset:0;z-index:70;background:rgb(10 12 30/.5);opacity:0;transition:opacity .35s}
+.o-scrim.on{opacity:1}
+.o-drawer{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(620px,100vw);display:flex;flex-direction:column;background:var(--bg);border-left:1px solid var(--border);box-shadow:-24px 0 60px -24px rgb(10 12 30/.5);
+  transform:translateX(100%);visibility:hidden;transition:transform .5s cubic-bezier(.22,.7,.2,1),visibility 0s .5s}
+.o-drawer.open{transform:none;visibility:visible;transition:transform .5s cubic-bezier(.22,.7,.2,1),visibility 0s}
+.o-drawer.dragging{visibility:visible;transition:none}
+.o-dhead{position:relative;flex:none;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 18px;border-bottom:1px solid var(--border);touch-action:pan-y;cursor:grab;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 9%,var(--card)),var(--card))}
+.o-dhead h2{font-size:clamp(22px,3vw,28px);line-height:1.15;letter-spacing:-.015em;margin-top:2px}
+.o-dhead::before{content:"";position:absolute;left:8px;top:50%;width:4px;height:40px;margin-top:-20px;border-radius:4px;background:var(--outline-border);opacity:.5}
+.o-close{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--outline-border);background:var(--card);color:var(--fg);cursor:pointer}
+.o-close:hover{background:color-mix(in srgb,var(--brand) 12%,var(--card))}
+.o-dbody{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:18px 24px 28px}
+.o-dsub{font-size:15px;color:var(--muted-fg);margin-bottom:16px}
+.o-drawer .o-slide{grid-template-columns:minmax(0,1fr)}
+.o-drawer .o-faces{grid-template-rows:none}
+.o-drawer .o-main{padding:24px 22px 22px}
+.o-drawer .o-main h3{font-size:clamp(21px,3vw,26px)}
+.o-drawer .o-lead{font-size:15.5px}
+.o-drawer .o-letters{grid-template-columns:repeat(2,minmax(0,1fr))}
+.o-drawer .caption{text-align:left}
+@media(max-width:600px){.o-dhead{padding:18px 16px 14px}.o-dbody{padding:14px 14px 24px}.o-handle{padding:12px 8px}}
+@media(prefers-reduced-motion:reduce){.o-drawer,.o-drawer.open,.o-scrim,.o-handle{transition:none}}
+
+/* ---------- OANI drawer: liquid glass (frosted panel, drifting colour, specular edge, light that follows the cursor) ---------- */
+.o-drawer{--dg1:rgb(255 255 255/.74);--dg2:rgb(244 247 250/.5);isolation:isolate;overflow:hidden;
+  background:linear-gradient(155deg,var(--dg1),var(--dg2));-webkit-backdrop-filter:blur(26px) saturate(1.7);backdrop-filter:blur(26px) saturate(1.7);
+  border-left:1px solid rgb(255 255 255/.75);box-shadow:-30px 0 70px -26px rgb(10 12 30/.55),inset 1px 0 0 rgb(255 255 255/.8),inset 0 1px 0 rgb(255 255 255/.7)}
+:root[data-theme=dark] .o-drawer{--dg1:rgb(34 34 40/.74);--dg2:rgb(24 24 28/.55);border-left-color:rgb(255 255 255/.16)}
+.o-drawer::before{content:"";position:absolute;inset:-20%;z-index:-1;pointer-events:none;
+  background:radial-gradient(360px 300px at 18% 12%,color-mix(in srgb,var(--green) 34%,transparent),transparent 70%),
+    radial-gradient(420px 340px at 92% 38%,color-mix(in srgb,var(--purple) 30%,transparent),transparent 70%),
+    radial-gradient(420px 360px at 30% 92%,color-mix(in srgb,var(--brand) 36%,transparent),transparent 70%);
+  filter:blur(18px);animation:oOrbs 18s ease-in-out infinite alternate}
+@keyframes oOrbs{to{transform:translate3d(-5%,4%,0) scale(1.12) rotate(6deg)}}
+.o-drawer::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(280px circle at var(--mx,72%) var(--my,8%),rgb(255 255 255/.5),transparent 70%),linear-gradient(118deg,rgb(255 255 255/.4),transparent 34%,transparent 70%,rgb(255 255 255/.12))}
+.o-dhead{background:rgb(255 255 255/.22);border-bottom:1px solid rgb(255 255 255/.7);box-shadow:0 1px 0 rgb(22 24 44/.05)}
+:root[data-theme=dark] .o-dhead{background:rgb(255 255 255/.04);border-bottom-color:rgb(255 255 255/.12)}
+.o-close{background:rgb(255 255 255/.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgb(255 255 255/.8);box-shadow:inset 0 1px 0 #fff,0 6px 14px -8px rgb(22 24 44/.4)}
+/* glass cards inside the drawer */
+.o-drawer .o-tabs{background:rgb(255 255 255/.4);border-color:rgb(255 255 255/.8);box-shadow:inset 0 1px 0 #fff,0 10px 24px -16px rgb(22 24 44/.35)}
+.o-drawer .o-ind{background:rgb(255 255 255/.88);border-color:rgb(255 255 255/.9);box-shadow:inset 0 1px 0 #fff,0 8px 20px -10px var(--ot)}
+.o-drawer .o-main,.o-drawer .o-face{border:1px solid rgb(255 255 255/.75);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgb(255 255 255/.3),0 16px 32px -20px color-mix(in srgb,var(--tone) 60%,transparent)}
+.o-drawer .o-main{border-top:1px solid rgb(255 255 255/.75);background:linear-gradient(165deg,color-mix(in srgb,var(--ot) 20%,rgb(255 255 255/.5)),rgb(255 255 255/.3) 70%)}
+.o-drawer .o-face{border-top:1px solid rgb(255 255 255/.75);background:linear-gradient(165deg,color-mix(in srgb,var(--tone) 18%,rgb(255 255 255/.5)),rgb(255 255 255/.3) 72%)}
+.o-drawer .o-main::after,.o-drawer .o-face::after{content:"";position:absolute;left:14px;right:14px;top:0;height:1px;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent,#fff 30%,#fff 70%,transparent);opacity:.9}
+.o-drawer .o-main{border-bottom:3px solid color-mix(in srgb,var(--ot) 55%,transparent)}
+.o-drawer .o-face{border-bottom:3px solid color-mix(in srgb,var(--tone) 55%,transparent)}
+.o-drawer .o-letters button,.o-drawer .o-chips a,.o-drawer .o-tests li{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgb(255 255 255/.8)}
+.o-drawer .o-letters button{background:color-mix(in srgb,var(--ot) 12%,rgb(255 255 255/.5));border-color:rgb(255 255 255/.8)}
+.o-drawer .o-nav,.o-drawer .o-bar{box-shadow:inset 0 1px 0 rgb(255 255 255/.7)}
+#op-5 .o-main{background:linear-gradient(145deg,rgb(42 45 82/.86),rgb(22 24 44/.9));border-color:rgb(255 255 255/.28);border-bottom-color:rgb(255 255 255/.12);box-shadow:inset 0 1px 0 rgb(255 255 255/.35),0 18px 36px -20px rgb(22 24 44/.8)}
+#op-5 .o-tests li{box-shadow:inset 0 1px 0 rgb(255 255 255/.14)}
+/* the pull tab and the veil behind the drawer */
+.o-handle{background:linear-gradient(180deg,rgb(36 129 143/.82),rgb(156 45 183/.82));-webkit-backdrop-filter:blur(12px) saturate(1.6);backdrop-filter:blur(12px) saturate(1.6);
+  border:1px solid rgb(255 255 255/.5);border-right:0;box-shadow:-8px 12px 30px -12px rgb(22 24 44/.6),inset 1px 1px 0 rgb(255 255 255/.6),inset 0 -1px 0 rgb(255 255 255/.18);overflow:hidden}
+.o-handle::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgb(255 255 255/.38),transparent 46%)}
+.o-scrim{background:rgb(10 12 30/.3);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+@media(prefers-reduced-motion:reduce){.o-drawer::before{animation:none}}
+
+/* ---------- OANI drawer: the tabs are locked to the bottom and the content scrolls behind them ---------- */
+.o-drawer .oslider{display:contents}
+.o-drawer .o-dbody{padding-bottom:14px}
+.o-drawer .o-tabs{position:sticky;bottom:14px;z-index:5;margin:18px 0 0;
+  background:rgb(255 255 255/.5);-webkit-backdrop-filter:blur(22px) saturate(1.8);backdrop-filter:blur(22px) saturate(1.8);
+  box-shadow:inset 0 1px 0 #fff,0 -14px 30px -14px rgb(22 24 44/.35),0 14px 30px -14px rgb(22 24 44/.35)}
+.o-drawer .o-ctl{margin-top:18px}
+.o-drawer .caption{margin-top:14px}
+@media(max-width:600px){.o-drawer .o-tabs{bottom:10px}.o-drawer .o-dbody{padding-bottom:10px}}
